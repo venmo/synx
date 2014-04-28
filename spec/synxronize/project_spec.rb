@@ -42,12 +42,12 @@ describe Synxronize::Project do
       dummySynxProject.send(:work_root_pathname)
     end
 
-    it "should be an idempotent operation" do
-      dummySynxProject.send(:work_root_pathname)
+    it "should be an idempotent operation but return the same value through memoization" do
+      pathname = dummySynxProject.send(:work_root_pathname)
       expect(FileUtils).to_not receive(:rm_rf)
       expect_any_instance_of(Pathname).to_not receive(:exist?)
       expect_any_instance_of(Pathname).to_not receive(:mkpath)
-      dummySynxProject.send(:work_root_pathname)
+      expect(dummySynxProject.send(:work_root_pathname)).to be(pathname)
     end
 
   end
