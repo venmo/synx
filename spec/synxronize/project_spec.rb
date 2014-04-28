@@ -2,28 +2,9 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Synxronize::Project do
 
-  describe "#initialize" do
-    it "should set @xcodeproj as a Xcodeproj::Project for the path" do
-      mockPath = double(String)
-      mockProj = double(Xcodeproj::Project)
-
-      expect(Xcodeproj::Project).to receive(:open).with(mockPath).and_return(mockProj)
-
-      project = Synxronize::Project.new(mockPath)
-      project.instance_variable_get("@xcodeproj").should be(mockProj)
-    end
-  end
-
-  describe "::open" do
-    it "should initialize and return a new Synxronize::Project with the given path" do
-      mockPath = double(String)
-      mockProject = double(Synxronize::Project)
-
-      expect(Synxronize::Project).to receive(:new).with(mockPath).and_return(mockProject)
-
-      Synxronize::Project.open(mockPath).should be(mockProject)
-
-    end
+  let(:dummySynxProject) do
+    path = File.join(File.dirname(__FILE__), '..', 'dummy', 'dummy.xcodeproj')
+    Synxronize::Project.open(path)
   end
 
   describe "#sync" do
@@ -35,9 +16,39 @@ describe Synxronize::Project do
   describe "#sync_file" do
   end
 
-  describe "#temp_root_path" do
+  describe "#root_pathname" do
+    it "should return the pathname to the directory that the .pbxproj file is inside" do
+      expected = Pathname(File.join(File.dirname(__FILE__), '..', 'dummy'))
+      dummySynxProject.send(:root_pathname).realpath.should eq(expected.realpath)
+    end
   end
 
-  describe "#root_path" do
+  describe "#work_root_pathname" do
+
+    it "should return the pathname to the directory synxchronize will do its work in" do
+      expected = Pathname(Synxronize::Project.const_get(:SYNXRONIZE_DIR)) + "dummy"
+      dummySynxProject.send(:work_root_pathname).realpath.should eq(expected.realpath)
+    end
+
+    it "should start fresh by removing any existing directory at work_root_pathname" do
+      Pathname.any_instance.stub(:exist?).and_return(true)
+      expect(FileUtils).to receive(:rm_rf)
+
+      dummySynxProject.send(:work_root_pathname)
+    end
+
+    it "should create a directory at work_root_pathname" do
+      expect_any_instance_of(Pathname).to receive(:mkpath)
+      dummySynxProject.send(:work_root_pathname)
+    end
+
+    it "should be an idempotent operation" do
+      dummySynxProject.send(:work_root_pathname)
+      expect(FileUtils).to_not receive(:rm_rf)
+      expect_any_instance_of(Pathname).to_not receive(:exist?)
+      expect_any_instance_of(Pathname).to_not receive(:mkpath)
+      dummySynxProject.send(:work_root_pathname)
+    end
+
   end
 end

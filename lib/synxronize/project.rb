@@ -1,17 +1,11 @@
+require 'fileutils'
 require 'xcodeproj'
 
 module Synxronize
-  class Project
+  class Project < Xcodeproj::Project
 
-    TEMP_DIR_NAME_PREFIX = ".synxronize-"
-
-    def initialize(path)
-      @xcodeproj = Xcodeproj::Project.open(path)
-    end
-
-    def self.open(path)
-      return new(path)
-    end
+    SYNXRONIZE_DIR = File.join(ENV["HOME"], '.synxronize')
+    private_constant :SYNXRONIZE_DIR
 
     def sync
       sync_group(@xcodeproj.root_object.main_group)
@@ -26,22 +20,23 @@ module Synxronize
     end
     private :sync_file
 
-    def root_path
-      @root_path ||= Pathname(@xcodeproj).parent.to_s
+    def root_pathname
+      @root_pathname ||= Pathname(path).parent
     end
-    private :root_path
+    private :root_pathname
 
-    def temp_root_path
-      if @temp_root_path 
-        @temp_root_path
+    def work_root_pathname
+      if @work_root_pathname 
+        @work_root_pathname
       else
-        temp_dir_name = TEMP_DIR_NAME_PREFIX + Pathname(root_path).basename.to_s
-        temp_dir_pathname = Pathname(root_path).parent + temp_dir_name
-        temp_dir_pathname.mkdir
-        @temp_root_path = temp_dir_pathname.to_s
+        @work_root_pathname = Pathname(File.join(SYNXRONIZE_DIR, root_pathname.basename.to_s))
+        # Clean up any previous synx and start fresh
+        FileUtils.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
+        @work_root_pathname.mkpath
+        @work_root_pathname
       end
     end
-    private :temp_root_path
+    private :work_root_pathname
 
   end
 end
