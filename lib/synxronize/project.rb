@@ -1,5 +1,4 @@
 require 'fileutils'
-require 'find'
 require 'xcodeproj'
 
 module Synxronize
