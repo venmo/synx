@@ -11,7 +11,11 @@ module Synxronize
     def sync
       @delayed_groups_set_path = []
 
-      main_group.groups.each { |gr| sync_group(gr, pathname_to_work_pathname(main_group.real_path)) }
+      main_group.groups.each do |gr|
+        unless ["Libraries", "Frameworks"].include?(name_for_object(gr))
+          sync_group(gr, pathname_to_work_pathname(main_group.real_path))
+        end
+      end
       # Set group paths after we're done syncing everything, so that calls to group.realpath don't
       # give us paths to the working directory while we're syncing
       set_group_paths
@@ -27,7 +31,7 @@ module Synxronize
 
       group.files.each { |pbx_file| sync_pbx_file(pbx_file, group_work_pathname) }
       group.groups.each { |gr| sync_group(gr, group_work_pathname) }
-      # move_entries_not_in_xcodeproj(group, group_work_pathname)
+      move_entries_not_in_xcodeproj(group, group_work_pathname)
     end
     private :sync_group
 
@@ -35,6 +39,7 @@ module Synxronize
       if should_sync_pbx_file?(pbx_file)
         if should_move_pbx_file?(pbx_file)
           FileUtils.mv(pbx_file.real_path.to_s, parent_work_pathname.to_s)
+          pbx_file.source_tree = "<group>"
           pbx_file.path = pbx_file.real_path.basename.to_s
         else
           # Don't move these files around -- they're not even inside the structure. Just fix the relative references.
@@ -60,7 +65,9 @@ module Synxronize
       if group_pathname.exist?
         Dir[group_pathname.realpath.to_s + "/*"].each do |entry|
           entry_pathname = group_pathname + entry
-          FileUtils.mv(entry_pathname.realpath, group_work_pathname.to_s) unless entry_in_group?(group, entry_pathname)
+          unless File.directory?(entry_pathname.to_s) || entry_in_group?(group, entry_pathname)
+            FileUtils.mv(entry_pathname.realpath, group_work_pathname.to_s)
+          end
         end
       end
     end
