@@ -8,11 +8,19 @@ module Synxronize
     SYNXRONIZE_DIR = File.join(ENV["HOME"], '.synxronize')
     private_constant :SYNXRONIZE_DIR
 
+    DEFAULT_EXCLUSIONS = %W(Libraries Frameworks)
+    private_constant :DEFAULT_EXCLUSIONS
+
+    def initialize
+      super
+      @exclusions = DEFAULT_EXCLUSIONS
+    end
+
     def sync
       @delayed_groups_set_path = []
 
       main_group.groups.each do |gr|
-        unless ["Libraries", "Frameworks"].include?(name_for_object(gr))
+        unless @exclusions.include?(name_for_object(gr))
           sync_group(gr, pathname_to_work_pathname(main_group.real_path))
         end
       end
@@ -65,6 +73,7 @@ module Synxronize
       if group_pathname.exist?
         Dir[group_pathname.realpath.to_s + "/*"].each do |entry|
           entry_pathname = group_pathname + entry
+          # TODO: Need a way to handle directories, too.
           unless File.directory?(entry_pathname.to_s) || entry_in_group?(group, entry_pathname)
             FileUtils.mv(entry_pathname.realpath, group_work_pathname.to_s)
           end
