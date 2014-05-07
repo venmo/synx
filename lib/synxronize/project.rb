@@ -27,27 +27,6 @@ module Synxronize
       save
     end
 
-    # def move_entries_not_in_xcodeproj(group, group_work_pathname)
-    #   group_pathname = work_pathname_to_pathname(group_work_pathname)
-    #   if group_pathname.exist?
-    #     Dir[group_pathname.realpath.to_s + "/*"].each do |entry|
-    #       entry_pathname = group_pathname + entry
-    #       # TODO: Need a way to handle directories, too.
-    #       unless File.directory?(entry_pathname.to_s) || entry_in_group?(group, entry_pathname)
-    #         FileUtils.mv(entry_pathname.realpath, group_work_pathname.to_s)
-    #       end
-    #     end
-    #   end
-    # end
-    # private :move_entries_not_in_xcodeproj
-
-    # def entry_in_group?(group, entry_pathname)
-    #   %W(. ..).include?(entry_pathname.basename.to_s) || group.children.any? do |child|
-    #     child.real_path.cleanpath == entry_pathname.realpath.cleanpath
-    #   end
-    # end
-    # private :entry_in_group?
-
     def transplant_work_project
       # Move the synced entries over
       Dir.glob(work_root_pathname + "*").each do |path|
@@ -60,7 +39,6 @@ module Synxronize
     def root_pathname
       @root_pathname ||= Pathname(path).parent
     end
-    private :root_pathname
 
     def work_root_pathname
       if @work_root_pathname 
@@ -73,7 +51,6 @@ module Synxronize
         @work_root_pathname
       end
     end
-    private :work_root_pathname
 
     # We build up the new project structure in a temporary workspace, so convert a file path in the project space to
     # one in the temp workspace.
@@ -88,23 +65,6 @@ module Synxronize
     def pathname_is_inside_root_pathname?(grandchild_pathname)
       grandchild_pathname.realpath.to_s =~ /^#{root_pathname.realpath.to_s}/
     end
-
-    # def fix_build_settings_if_necessary(old_pathname, new_pathname)
-    #   if old_pathname.to_s =~ /Prefix\.pch$/
-    #   elsif old_pathname.to_s =~ /Info\.plist$/
-    #   end
-    # end
-    # private :fix_build_settings_if_necessary
-
-    # def fix_build_setting(setting, old_path, new_pathname)
-    #   targets.each do |t|
-
-    #   end
-    # end
-    # private :fix_build_setting
-
-    # def each_group
-    # end
 
   end
 end

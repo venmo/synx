@@ -60,25 +60,6 @@ describe Synxronize::Project do
     end
   end
 
-  describe "#dir_name_for_group" do
-
-    let(:group_mock) { double(Xcodeproj::Project::Object::PBXGroup) }
-    it "should return the name if there is one" do
-        name_mock = double(String)
-        group_mock.stub(:name).and_return(name_mock)
-
-        expect(dummy_synx_project.send(:dir_name_for_group, group_mock)).to be(name_mock)
-    end
-
-    it "should return the path if there is no name" do
-        path_mock = double(String)
-        group_mock.stub(:name).and_return(nil)
-        group_mock.stub(:path).and_return(path_mock)
-
-        expect(dummy_synx_project.send(:dir_name_for_group, group_mock)).to be(path_mock)
-    end
-  end
-
   describe "#pathname_to_work_pathname" do
 
     it "should return the path in work_root_pathname that is relatively equivalent to root_pathname" do
