@@ -19,7 +19,7 @@ module Synxronize
     end
 
     def sync
-      main_group.groups.each { |group| group.sync(pathname_to_work_pathname(main_group.real_path)) }
+      main_group.groups.each { |group| group.sync }
       # Set group paths after we're done syncing everything, so that calls to group.realpath don't
       # give us paths to the working directory while we're syncing
       main_group.sync_child_group_paths

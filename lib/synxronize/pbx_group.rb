@@ -5,13 +5,12 @@ module Xcodeproj
     module Object
       class PBXGroup
         
-        def sync(parent_work_pathname)  
+        def sync
           unless excluded_from_sync?
-            group_work_pathname = parent_work_pathname + basename
-            group_work_pathname.mkpath
-            files.each { |pbx_file| pbx_file.sync(group_work_pathname, self) }
-            groups.each { |group| group.sync(group_work_pathname) }
-            move_entries_not_in_xcodeproj(group_work_pathname)
+            work_pathname.mkpath
+            files.each { |pbx_file| pbx_file.sync(self) }
+            groups.each { |group| group.sync }
+            move_entries_not_in_xcodeproj
           end
         end
 
@@ -33,14 +32,14 @@ module Xcodeproj
           self.source_tree = "<group>"
         end
 
-        def move_entries_not_in_xcodeproj(group_work_pathname)
-          group_pathname = project.work_pathname_to_pathname(group_work_pathname)
+        def move_entries_not_in_xcodeproj
+          group_pathname = project.work_pathname_to_pathname(work_pathname)
           if group_pathname.exist?
             Dir[group_pathname.realpath.to_s + "/*"].each do |entry|
               entry_pathname = group_pathname + entry
               # TODO: Need a way to handle directories, too.
               unless File.directory?(entry_pathname.to_s) || has_entry?(entry_pathname)
-                FileUtils.mv(entry_pathname.realpath, group_work_pathname.to_s)
+                FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
               end
             end
           end
@@ -53,6 +52,11 @@ module Xcodeproj
           end
         end
         private :has_entry?
+
+        def work_pathname
+          # hierarchy path has a leading '/' that will break path concatenation
+          project.work_root_pathname + hierarchy_path[1..-1]
+        end
 
       end
     end

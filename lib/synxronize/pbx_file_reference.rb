@@ -5,17 +5,17 @@ module Xcodeproj
     module Object
       class PBXFileReference
         
-        def sync(parent_work_pathname, group)
+        def sync(group)
           ensure_internal_consistency(group)
           if should_sync?
             if should_move?
-              FileUtils.mv(real_path.to_s, parent_work_pathname.to_s)
+              FileUtils.mv(real_path.to_s, group.work_pathname.to_s)
               # TODO: move out to abstract_object
               self.source_tree = "<group>"
               self.path = real_path.basename.to_s
             else
               # Don't move this file around -- it's not even inside the structure. Just fix the relative reference
-              self.path = real_path.relative_path_from((project.work_pathname_to_pathname(parent_work_pathname))).to_s
+              self.path = real_path.relative_path_from((project.work_pathname_to_pathname(group.work_pathname))).to_s
             end
             change_build_settings_reference
           end
