@@ -20,9 +20,6 @@ module Synxronize
 
     def sync
       main_group.groups_and_version_groups.each(&:sync)
-      # Set group paths after we're done syncing everything, so that calls to group.realpath don't
-      # give us paths to the working directory while we're syncing
-      main_group.sync_child_group_paths
       main_group.groups_and_version_groups.each(&:move_entries_not_in_xcodeproj)
       transplant_work_project
       save

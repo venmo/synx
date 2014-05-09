@@ -10,6 +10,7 @@ module Xcodeproj
             work_pathname.mkpath
             files.each { |pbx_file| pbx_file.sync(self) }
             groups_and_version_groups.each { |group| group.sync }
+            sync_path
           end
         end
 
@@ -17,21 +18,11 @@ module Xcodeproj
           project.group_exclusions.include?(hierarchy_path)
         end
 
-        def sync_child_group_paths
-          unless excluded_from_sync?
-            groups_and_version_groups.each do |group|
-              group.sync_child_group_paths
-              group.sync_path
-            end
-          end
-        end
-
         def move_entries_not_in_xcodeproj
           unless excluded_from_sync?
             Dir[real_path.to_s + "/*"].each do |entry|
               entry_pathname = real_path + entry
               unless has_entry?(entry_pathname)
-                puts "moving #{entry_pathname.realpath}"
                 FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
               end
             end
@@ -43,6 +34,7 @@ module Xcodeproj
           self.path = basename
           self.source_tree = "<group>"
         end
+        :private sync_path
 
         def has_entry?(entry_pathname)
           %W(. ..).include?(entry_pathname.basename.to_s) || children.any? do |child|
