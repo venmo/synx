@@ -7,7 +7,7 @@ module Synxronize
     SYNXRONIZE_DIR = File.join(ENV["HOME"], '.synxronize')
     private_constant :SYNXRONIZE_DIR
 
-    DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks)
+    DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products)
     private_constant :DEFAULT_EXCLUSIONS
 
     attr_accessor :delayed_groups_set_path, :group_exclusions
