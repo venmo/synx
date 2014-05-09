@@ -48,7 +48,7 @@ module Xcodeproj
           # hierarchy path has a leading '/' that will break path concatenation
           @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
         end
-        privatae :work_pathname
+        private :work_pathname
 
         def groups_and_version_groups
           groups | version_groups
