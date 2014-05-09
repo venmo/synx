@@ -29,7 +29,6 @@ module Xcodeproj
             groups_and_version_groups.each(&:move_entries_not_in_xcodeproj)
           end
         end
-        private :move_entries_not_in_xcodeproj
 
         def sync_path
           self.path = basename
