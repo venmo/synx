@@ -1,15 +1,67 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
+require 'pathname'
+
 describe Synxronize::Project do
 
+  let(:dummy_synx_pathname) { Pathname(File.join(File.dirname(__FILE__), '..', 'dummy')) }
+  let(:dummy_synx_project_path) { dummy_synx_pathname + 'dummy.xcodeproj' }
+
   let(:dummy_synx_project) do
-    path = File.join(File.dirname(__FILE__), '..', 'dummy', 'dummy.xcodeproj')
-    Synxronize::Project.open(path)
+    Synxronize::Project.open(dummy_synx_project_path)
   end
 
+  def pathname_should_have_x_entries(pathname, num)
+    # Every entries.count expectation is inflated by 2, because of '.' and '..'
+    expect(pathname.entries.count).to eq(num + 2)
+  end
+
+  def pathname_should_have_files(*files)
+    existing_files = pathname.entries.map(&:to_s)
+    files.each |file| do
+      expect(existing_files.include?(file)).to be(true)
+  end5
   describe "#sync" do
-    it "" do
-      dummy_synx_project.sync
+
+    before(:all) { Synxronize::Project.open(dummy_synx_project_path).sync }
+
+    let(:expected_structure) do
+      [
+        {
+        "dummy" => 
+          [
+          ]
+        },
+        {
+        "dummyTests" =>
+          [
+          ]
+        },
+        "dummy.xcodeproj",
+        {
+        "Products" =>
+          []
+        }
+      ]
+    end
+
+    it "should have the correct physical file structure" do
+      pathname_should_have_x_entries(dummy_synx_pathname, 3)
+      dummy_dummy = dummy_synx_pathname + 'dummy'
+      pathname_should_have_x_entries(dummy_dummy, 5)
+      
+
+      dummy_dummyTests = dummy_synx_pathname + 'dummyTests'
+
+      dummy_Products = dummy_synx_pathname + 'Products'
+      pathname_should_have_x_entries(dummy_Products, 0)
+
+    end
+
+    it "should not have modified the Xcode group structure" do
+    end
+
+    it "should have updated the pch and info.plist build setting paths" do
     end
   end
 
