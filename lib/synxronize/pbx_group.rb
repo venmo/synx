@@ -30,7 +30,6 @@ module Xcodeproj
           unless excluded_from_sync?
             Dir[real_path.to_s + "/*"].each do |entry|
               entry_pathname = real_path + entry
-              # TODO: Need a way to handle directories, too.
               unless has_entry?(entry_pathname)
                 puts "moving #{entry_pathname.realpath}"
                 FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
