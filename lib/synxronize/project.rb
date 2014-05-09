@@ -20,7 +20,7 @@ module Synxronize
 
     def sync
       main_group.groups_and_version_groups.each(&:sync)
-      main_group.groups_and_version_groups.each(&:move_entries_not_in_xcdeproj)
+      main_group.groups_and_version_groups.each(&:move_entries_not_in_xcodeproj)
       transplant_work_project
       save
     end
