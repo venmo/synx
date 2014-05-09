@@ -7,20 +7,9 @@ describe Synxronize::Project do
     Synxronize::Project.open(path)
   end
 
-  let(:venmo_synx_project) do
-    path = File.join(ENV["HOME"], 'github.braintreeps.com/venmo-iphone-2/VenmoIOS/Venmo.xcodeproj')
-    Synxronize::Project.open(path)
-  end
-
   describe "#sync" do
-  end
-
-  describe "#sync_group" do
-  end
-
-  describe "#sync_file" do
     it "" do
-      venmo_synx_project.sync
+      dummy_synx_project.sync
     end
   end
 

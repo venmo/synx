@@ -11,7 +11,6 @@ module Xcodeproj
             files.each { |pbx_file| pbx_file.sync(self) }
             groups_and_version_groups.each { |group| group.sync }
             sync_path
-            move_entries_not_in_xcodeproj
           end
         end
 
@@ -27,6 +26,7 @@ module Xcodeproj
                 FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
               end
             end
+            groups_and_version_groups.each(&:move_entries_not_in_xcodeproj)
           end
         end
         private :move_entries_not_in_xcodeproj
@@ -48,7 +48,6 @@ module Xcodeproj
           # hierarchy path has a leading '/' that will break path concatenation
           @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
         end
-        private :work_pathname
 
         def groups_and_version_groups
           groups | version_groups
