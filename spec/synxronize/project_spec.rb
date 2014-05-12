@@ -65,6 +65,8 @@ describe Synxronize::Project do
 
   describe "#work_root_pathname" do
 
+    before(:each) { DUMMY_SYNX_TEST_PROJECT.instance_variable_set("@work_root_pathname", nil) }
+
     it "should return the pathname to the directory synxchronize will do its work in" do
       expected = Pathname(Synxronize::Project.const_get(:SYNXRONIZE_DIR)) + "test_dummy"
       DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname).realpath.should eq(expected.realpath)
