@@ -8,7 +8,7 @@ require 'yaml'
 describe Synxronize::Project do
 
   DUMMY_SYNX_PATH = File.join(File.dirname(__FILE__), '..', 'dummy')
-  DUMMY_SYNX_TEST_PATH = File.join(File.dirname(__FILE__), '..', 'test_dummy'))
+  DUMMY_SYNX_TEST_PATH = File.join(File.dirname(__FILE__), '..', 'test_dummy')
   DUMMY_SYNX_TEST_PROJECT_PATH = File.join(DUMMY_SYNX_TEST_PATH, 'dummy.xcodeproj')
 
   before(:all) do
@@ -18,7 +18,7 @@ describe Synxronize::Project do
   end
 
   after(:all) do
-    FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
+   # FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
   end
 
   describe "#sync" do
@@ -58,7 +58,7 @@ describe Synxronize::Project do
   describe "#root_pathname" do
 
     it "should return the pathname to the directory that the .pbxproj file is inside" do
-      expected = Pathname(File.join(File.dirname(__FILE__), '..', 'dummy'))
+      expected = Pathname(File.join(File.dirname(__FILE__), '..', 'test_dummy'))
       DUMMY_SYNX_TEST_PROJECT.send(:root_pathname).realpath.should eq(expected.realpath)
     end
   end
@@ -66,7 +66,7 @@ describe Synxronize::Project do
   describe "#work_root_pathname" do
 
     it "should return the pathname to the directory synxchronize will do its work in" do
-      expected = Pathname(Synxronize::Project.const_get(:SYNXRONIZE_DIR)) + "dummy"
+      expected = Pathname(Synxronize::Project.const_get(:SYNXRONIZE_DIR)) + "test_dummy"
       DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname).realpath.should eq(expected.realpath)
     end
 
