@@ -18,12 +18,12 @@ describe Synxronize::Project do
   end
 
   after(:all) do
-   # FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
+   FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
   end
 
   describe "#sync" do
 
-    before(:all) do 
+    before(:all) do
       DUMMY_SYNX_TEST_PROJECT.sync
     end
 
@@ -48,7 +48,24 @@ describe Synxronize::Project do
 
     end
 
-    it "should not have modified the Xcode group structure" do
+    it "should not have modified the Xcode group structure, except for fixing double file references" do
+      def verify_file_structure(group, expected_structure)
+        expected_structure.each do |object_name, object_children|
+          failure_message = "expected group `#{group.basename}` to have child `#{object_name}`"
+          object = group.children.detect { |child| child.basename == object_name }
+          expect(group).to_not be_nil, failure_message
+
+          if object.instance_of?(Xcodeproj::Project::Object::PBXGroup)
+            object_children ||= {}
+            failure_message = "Expected #{object_name} to have #{object_children.count} children, found #{object.children.count}"
+            expect(object_children.count).to eq(object.children.count), failure_message
+            verify_file_structure(object, object_children) if object_children.count > 0
+          end
+        end
+      end
+
+      expected_file_structure = YAML::load_file(File.join(File.dirname(__FILE__), "expected_group_structure.yml"))
+      verify_file_structure(DUMMY_SYNX_TEST_PROJECT.main_group, expected_file_structure)
     end
 
     it "should have updated the pch and info.plist build setting paths" do
