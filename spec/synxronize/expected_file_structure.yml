@@ -30,8 +30,8 @@ dummy:
       Wowwww.h:
       Wowwww.m:
 dummyTests:
-  en.lproj:
-    InfoPlist.strings:
   Supporting Files:
+    en.lproj:
+      InfoPlist.strings:
     dummyTests-Info.plist:
   dummyTests.m:

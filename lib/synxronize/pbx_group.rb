@@ -9,7 +9,7 @@ module Xcodeproj
           unless excluded_from_sync?
             work_pathname.mkpath
             files.each { |pbx_file| pbx_file.sync(self) }
-            groups_and_version_groups.each { |group| group.sync }
+            all_groups.each { |group| group.sync }
             sync_path
           end
         end
@@ -26,7 +26,7 @@ module Xcodeproj
                 FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
               end
             end
-            groups_and_version_groups.each(&:move_entries_not_in_xcodeproj)
+            all_groups.each(&:move_entries_not_in_xcodeproj)
           end
         end
 
@@ -43,14 +43,14 @@ module Xcodeproj
         end
         private :has_entry?
 
-        def work_pathname
-          # hierarchy path has a leading '/' that will break path concatenation
-          @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
+        def all_groups
+          groups | version_groups | variant_groups
         end
 
-        def groups_and_version_groups
-          groups | version_groups
+        def variant_groups
+          children.select { |child| child.instance_of?(Xcodeproj::Project::Object::PBXVariantGroup) }
         end
+        private :variant_groups
 
       end
     end

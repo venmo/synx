@@ -18,7 +18,7 @@ describe Synxronize::Project do
   end
 
   after(:all) do
-   FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
+   #FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
   end
 
   describe "#sync" do
