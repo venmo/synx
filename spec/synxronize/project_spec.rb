@@ -69,6 +69,17 @@ describe Synxronize::Project do
     end
 
     it "should have updated the pch and info.plist build setting paths" do
+      # dummy target
+      DUMMY_SYNX_TEST_PROJECT.targets.first.each_build_settings do |bs|
+        expect(bs["GCC_PREFIX_HEADER"]).to eq("dummy/Supporting Files/dummy-Prefix.pch")
+        expect(bs["INFOPLIST_FILE"]).to be_nil
+      end
+
+      # dummyTests target
+      DUMMY_SYNX_TEST_PROJECT.targets.last.each_build_settings do |bs|
+        expect(bs["GCC_PREFIX_HEADER"]).to eq("dummyTests/Supporting Files/dummyTests-Prefix.pch")
+        expect(bs["INFOPLIST_FILE"]).to eq("dummyTests/Supporting Files/dummyTests-Info.plist")
+      end
     end
   end
 

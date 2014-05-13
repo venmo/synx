@@ -1,0 +1,15 @@
+//
+//  dummyTests-prefix.pch
+//  dummy
+//
+//  Created by Mark Larsen on 5/13/14.
+//  Copyright (c) 2014 marklarr. All rights reserved.
+//
+
+#ifndef dummy_dummyTests_prefix_pch
+#define dummy_dummyTests_prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

@@ -44,7 +44,7 @@ module Xcodeproj
         # Fixes things like pch, info.plist references being changed
         def change_build_settings_reference
           return unless basename =~ /\.(pch|plist)$/
-
+          
           project.targets.each do |t|
             t.each_build_settings do |bs|
               ["INFOPLIST_FILE", "GCC_PREFIX_HEADER"].each do |setting_key|

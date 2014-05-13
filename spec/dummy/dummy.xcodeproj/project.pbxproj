@@ -73,6 +73,7 @@
 		8C848C63190DB9B300E9727B /* dummyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dummyTests-Info.plist"; sourceTree = "<group>"; };
 		8C848C65190DB9B300E9727B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C848C67190DB9B300E9727B /* dummyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dummyTests.m; sourceTree = "<group>"; };
+		8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummyTests-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +205,7 @@
 			children = (
 				8C848C63190DB9B300E9727B /* dummyTests-Info.plist */,
 				8C848C64190DB9B300E9727B /* InfoPlist.strings */,
+				8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -430,7 +432,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dummy/dummy-Prefix.pch";
+				GCC_PREFIX_HEADER = "dummyTests/Supporting Files/dummyTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -450,7 +452,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dummy/dummy-Prefix.pch";
+				GCC_PREFIX_HEADER = "dummyTests/Supporting Files/dummyTests-Prefix.pch";
 				INFOPLIST_FILE = "dummyTests/dummyTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;

@@ -33,5 +33,6 @@ dummyTests:
   Supporting Files:
     en.lproj:
       InfoPlist.strings:
+    dummyTests-Prefix.pch:
     dummyTests-Info.plist:
   dummyTests.m:
