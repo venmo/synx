@@ -21,6 +21,12 @@ Or install it yourself as:
 Execute the command on yor project to have it reorganize the files on the file system:
 
      $ synxronize path/to/my/project.xcodeproj
+     
+It may have confused cocoapods. Pod install, if you use them:
+
+    $ pod
+    
+You're good to go!
 
 
 ## Contributing
