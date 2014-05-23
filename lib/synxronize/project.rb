@@ -19,9 +19,14 @@ module Synxronize
     end
 
     def sync
+      Synxronize::Tabber.increase
+      Synxronize::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
       main_group.all_groups.each(&:sync)
+      puts "\n\n"
+      Synxronize::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)
       transplant_work_project
+      Synxronize::Tabber.decrease
       save
     end
 

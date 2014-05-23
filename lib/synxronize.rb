@@ -5,6 +5,9 @@ require "synxronize/pbx_group"
 require "synxronize/abstract_object"
 require "synxronize/pbx_native_target"
 require "synxronize/pbx_variant_group"
+require "synxronize/tabber"
+
+require "colored"
 
 module Synxronize
 end

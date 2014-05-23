@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
 
   spec.add_dependency "clamp"
+  spec.add_dependency "colored"
   spec.add_dependency "xcodeproj"
 end

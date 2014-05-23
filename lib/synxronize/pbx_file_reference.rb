@@ -18,7 +18,19 @@ module Xcodeproj
               self.path = real_path.relative_path_from((project.work_pathname_to_pathname(group.work_pathname))).to_s
             end
             change_build_settings_reference
+
+            output
+          else
+            Synxronize::Tabber.puts "skipped #{basename}".red
           end
+        end
+
+        def output
+          build_settings_ammended = "(build settings ammended: #{@setting_keys_changed.join(", ")})" if @setting_keys_changed.count > 0
+          removed_from_groups = "(had multiple parent groups, removed from groups: #{@removed_from_groups.join(", ")})" if @removed_from_groups.count > 0
+          str_output = "#{basename} #{build_settings_ammended} #{removed_from_groups}"
+          str_output = str_output.yellow if removed_from_groups || build_settings_ammended
+          Synxronize::Tabber.puts str_output
         end
 
         def should_sync?
@@ -34,15 +46,27 @@ module Xcodeproj
         private :should_move?
 
         def ensure_internal_consistency(group)
+          @removed_from_groups = []
           if referring_groups.count > 1
             # Files should only have one referring group -- this is an internal consistency issue if there is more than 1.
             # Just remove all referring groups but the one we're syncing with
-            referring_groups.each { |rg| rg.remove_reference(self) unless rg == group }
+
+            referring_groups.each do |rg|
+              unless rg == group
+                rg.remove_reference(self) unless rg == group
+                @removed_from_groups << rg.hierarchy_path
+              end
+            end
+
           end
+
+          # Duplicates for some reason?
+          @removed_from_groups.uniq! 
         end
 
         # Fixes things like pch, info.plist references being changed
         def change_build_settings_reference
+          @setting_keys_changed = []
           return unless basename =~ /\.(pch|plist)$/
           
           project.targets.each do |t|
@@ -51,10 +75,13 @@ module Xcodeproj
                 setting_value = bs[setting_key]
                 if setting_value == real_path.relative_path_from(project.root_pathname).to_s
                   bs[setting_key] = hierarchy_path[1..-1]
+                  @setting_keys_changed << setting_key
                 end
               end if bs
             end
           end
+
+          @setting_keys_changed.uniq!
         end
 
       end

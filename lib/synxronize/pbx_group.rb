@@ -7,10 +7,15 @@ module Xcodeproj
         
         def sync
           unless excluded_from_sync?
+            Synxronize::Tabber.puts "#{basename}/".green
+            Synxronize::Tabber.increase
+
             work_pathname.mkpath
             files.each { |pbx_file| pbx_file.sync(self) }
             all_groups.each { |group| group.sync }
             sync_path
+
+            Synxronize::Tabber.decrease
           end
         end
 
@@ -20,13 +25,18 @@ module Xcodeproj
 
         def move_entries_not_in_xcodeproj
           unless excluded_from_sync?
+            Synxronize::Tabber.increase
+            Synxronize::Tabber.puts "#{basename}/".green
             Dir[real_path.to_s + "/*"].each do |entry|
               entry_pathname = real_path + entry
               unless has_entry?(entry_pathname)
                 FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
+
+                puts_unused_file(entry_pathname)
               end
             end
             all_groups.each(&:move_entries_not_in_xcodeproj)
+            Synxronize::Tabber.decrease
           end
         end
 
@@ -51,6 +61,17 @@ module Xcodeproj
           children.select { |child| child.instance_of?(Xcodeproj::Project::Object::PBXVariantGroup) }
         end
         private :variant_groups
+
+        def puts_unused_file(file_pathname)
+          source_file_extensions = %W(.h .m .mm .c)
+
+          output = file_pathname.basename.to_s
+          if source_file_extensions.include?(file_pathname.extname)
+            output = "#{output} (source file that is not included in Xcode project)".yellow
+          end
+
+          Synxronize::Tabber.puts output
+        end
 
       end
     end
