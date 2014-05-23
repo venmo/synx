@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. `$ synxronize path/to/my/project.xcodeproj`
 
 ## Contributing
 
