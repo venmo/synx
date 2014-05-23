@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-1. `$ synxronize path/to/my/project.xcodeproj`
+Execute the command on yor project to have it reorganize the files on the file system:
+
+     $ synxronize path/to/my/project.xcodeproj
+
 
 ## Contributing
 
