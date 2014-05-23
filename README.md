@@ -1,6 +1,6 @@
 # Synxronize
 
-TODO: Write a gem description
+A command-line tool that reorganizes your project files into folders that match Xcode's group structure.
 
 ## Installation
 
