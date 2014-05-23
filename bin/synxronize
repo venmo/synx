@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'clamp'
+require File.join(File.dirname(__FILE__), '..', 'lib', 'synxronize')
+
+Clamp do
+
+  parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
+
+  def execute
+    Synxronize::Project.open(xcodeproj_path).sync
+  end
+
+end

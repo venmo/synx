@@ -7,9 +7,12 @@ Gem::Specification.new do |spec|
   spec.name          = "synxronize"
   spec.version       = Synxronize::VERSION
   spec.authors       = ["Mark Larsen"]
-  spec.email         = ["larse503@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.email         = ["mark@venmo.com"]
+  spec.summary       = %q{A command-line tool to reorganize your project files to match Xcode's group structure}
+  spec.description   = <<-DESC
+                       A command-line tool to reorganize your project files to match Xcode's group structure. 
+                       Parses the .xcodeproj to build the group structure out on the file system.
+                       DESC
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -23,5 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry"
 
+  spec.add_dependency "clamp"
   spec.add_dependency "xcodeproj"
 end
