@@ -72,6 +72,7 @@ module Xcodeproj
 
           Synx::Tabber.puts output
         end
+        private :puts_unused_file
 
       end
     end
