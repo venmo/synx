@@ -93,7 +93,7 @@ module Xcodeproj
             remove_reference(file)
             # Adds just one back
             self << file
-            Synx::Tabber.puts "#{file.basename}: removed duplicate reference".red
+            Synx::Tabber.puts "#{file.basename} (removed duplicate reference)".red
           end
         end
         private :squash_duplicate_file_references
