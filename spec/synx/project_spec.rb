@@ -83,6 +83,20 @@ describe Synx::Project do
     end
   end
 
+  describe "group_exclusions=" do
+
+    it "should raise an IndexError if any of the groups do not exist" do
+      expect { DUMMY_SYNX_TEST_PROJECT.group_exclusions = %W(/dummy /dummy/DoesntExist) }.to raise_error(IndexError)
+    end
+
+    it "should be fine if the groups all exist" do
+      group_exclusions = %W(/dummy /dummy/GroupThatDoubleReferencesFile /dummy/SuchGroup/VeryChildGroup)
+      DUMMY_SYNX_TEST_PROJECT.group_exclusions = group_exclusions
+
+      expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions).to eq(group_exclusions)
+    end
+  end
+
   describe "#root_pathname" do
 
     it "should return the pathname to the directory that the .pbxproj file is inside" do

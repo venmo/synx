@@ -69,6 +69,21 @@ module Synx
       grandchild_pathname.realpath.to_s =~ /^#{root_pathname.realpath.to_s}/
     end
 
+    def group_exclusions=(new_exclusions)
+      new_exclusions.each do |exclusion|
+        # Don't check our own default exclusions -- they may not have it in their project.
+        unless DEFAULT_EXCLUSIONS.include?(exclusion)
+          # remove leading '/' for this check
+          exclusion[0] = '' if exclusion[0] == '/'
+          unless self[exclusion]
+            raise IndexError, "No group #{exclusion} exists"
+          end
+        end
+      end
+
+      @group_exclusions = new_exclusions
+    end
+
   end
 end
 
