@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'synxronize/version'
+require 'synx/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "synxronize"
-  spec.version       = Synxronize::VERSION
+  spec.name          = "synx"
+  spec.version       = Synx::VERSION
   spec.authors       = ["Mark Larsen"]
   spec.email         = ["mark@venmo.com"]
   spec.summary       = %q{A command-line tool that reorganizes your project files into folders that match Xcode's group structure.}

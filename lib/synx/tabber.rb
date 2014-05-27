@@ -1,4 +1,4 @@
-module Synxronize
+module Synx
   class Tabber
 
     @@tabbing = ""

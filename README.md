@@ -1,4 +1,4 @@
-# Synxronize
+# Synx
 
 A command-line tool that reorganizes your project files into folders that match Xcode's group structure.
 
@@ -6,7 +6,7 @@ A command-line tool that reorganizes your project files into folders that match 
 
 Add this line to your application's Gemfile:
 
-    gem 'synxronize'
+    gem 'synx'
 
 And then execute:
 
@@ -14,13 +14,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install synxronize
+    $ gem install synx
 
 ## Usage
 
 Execute the command on yor project to have it reorganize the files on the file system:
 
-     $ synxronize path/to/my/project.xcodeproj
+     $ synx path/to/my/project.xcodeproj
      
 It may have confused cocoapods. Pod install, if you use them:
 
@@ -31,7 +31,7 @@ You're good to go!
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/synxronize/fork )
+1. Fork it ( https://github.com/[my-github-username]/synx/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

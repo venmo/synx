@@ -5,7 +5,7 @@ require 'pathname'
 require 'yaml'
 
 
-describe Synxronize::Project do
+describe Synx::Project do
 
   DUMMY_SYNX_PATH = File.join(File.dirname(__FILE__), '..', 'dummy')
   DUMMY_SYNX_TEST_PATH = File.join(File.dirname(__FILE__), '..', 'test_dummy')
@@ -14,7 +14,7 @@ describe Synxronize::Project do
   before(:all) do
     FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
     FileUtils.cp_r(DUMMY_SYNX_PATH, DUMMY_SYNX_TEST_PATH)
-    DUMMY_SYNX_TEST_PROJECT = Synxronize::Project.open(DUMMY_SYNX_TEST_PROJECT_PATH)
+    DUMMY_SYNX_TEST_PROJECT = Synx::Project.open(DUMMY_SYNX_TEST_PROJECT_PATH)
   end
 
   after(:all) do
@@ -96,7 +96,7 @@ describe Synxronize::Project do
     before(:each) { DUMMY_SYNX_TEST_PROJECT.instance_variable_set("@work_root_pathname", nil) }
 
     it "should return the pathname to the directory synxchronize will do its work in" do
-      expected = Pathname(Synxronize::Project.const_get(:SYNXRONIZE_DIR)) + "test_dummy"
+      expected = Pathname(Synx::Project.const_get(:SYNXRONIZE_DIR)) + "test_dummy"
       DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname).realpath.should eq(expected.realpath)
     end
 
