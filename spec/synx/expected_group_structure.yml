@@ -1,4 +1,6 @@
 dummy:
+  Resources:
+    image.png:
   AlreadySynced:
     Core Data.xcdatamodeld:
       Core Data.xcdatamodel:

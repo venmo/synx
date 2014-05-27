@@ -77,15 +77,20 @@ module Xcodeproj
         private :handle_unused_entry
 
         def handle_unused_file(file_pathname)
-          source_file_extensions = %W(.h .m .mm .c)
+          prune_file_extensions = %W(.h .m .mm .c .png .jpg .jpeg)
+          is_file_to_prune = prune_file_extensions.include?(file_pathname.extname.downcase)
 
-          FileUtils.mv(file_pathname.realpath, project.pathname_to_work_pathname(file_pathname.parent).realpath)
-
-          output = file_pathname.basename.to_s
-          if source_file_extensions.include?(file_pathname.extname)
-            output = "#{output} (source file that is not included in Xcode project)".yellow
+          if is_file_to_prune && project.prune
+            Synx::Tabber.puts "#{file_pathname.basename} (removed source/image file that's not included in xcode)".red
+            return
+          elsif !project.prune || !is_file_to_prune
+            FileUtils.mv(file_pathname.realpath, project.pathname_to_work_pathname(file_pathname.parent).realpath)
+            if is_file_to_prune
+              Synx::Tabber.puts "#{file_pathname.basename} (source/image file that's not included in xcode)".yellow
+            else
+              Synx::Tabber.puts file_pathname.basename
+            end
           end
-          Synx::Tabber.puts output
         end
         private :handle_unused_file
 

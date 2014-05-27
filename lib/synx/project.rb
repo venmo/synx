@@ -10,7 +10,7 @@ module Synx
     DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products)
     private_constant :DEFAULT_EXCLUSIONS
 
-    attr_accessor :delayed_groups_set_path, :group_exclusions
+    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune
 
     def self.open(project)
       project = super
@@ -18,7 +18,8 @@ module Synx
       project
     end
 
-    def sync
+    def sync(options={})
+      set_options(options)
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
       main_group.all_groups.each { |gr| gr.sync(main_group) }
@@ -28,7 +29,13 @@ module Synx
       transplant_work_project
       Synx::Tabber.decrease
       save
+      options = {}
     end
+
+    def set_options(options)
+      self.prune = options[:prune]
+    end
+    private :set_options
 
     def transplant_work_project
       # Move the synced entries over

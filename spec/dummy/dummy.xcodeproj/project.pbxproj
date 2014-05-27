@@ -75,6 +75,7 @@
 		8C848C63190DB9B300E9727B /* dummyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dummyTests-Info.plist"; sourceTree = "<group>"; };
 		8C848C65190DB9B300E9727B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C848C67190DB9B300E9727B /* dummyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dummyTests.m; sourceTree = "<group>"; };
+		8CADDD3A19354F120076033B /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummyTests-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +177,7 @@
 		8C848C4D190DB9B300E9727B /* dummy */ = {
 			isa = PBXGroup;
 			children = (
+				8CADDD3919354F060076033B /* Resources */,
 				8C2DEB84191D402E003A1F44 /* AlreadySynced */,
 				8C2DEB83191D3F9E003A1F44 /* GroupThatDoubleReferencesFile */,
 				8C2DEB7C191D3F16003A1F44 /* SuchGroup */,
@@ -217,9 +219,17 @@
 		8CADDD36193515B70076033B /* Other Files */ = {
 			isa = PBXGroup;
 			children = (
-			8C848C64190DB9B300E9727B /* InfoPlist.strings */,
+				8C848C64190DB9B300E9727B /* InfoPlist.strings */,
 			);
 			name = "Other Files";
+			sourceTree = "<group>";
+		};
+		8CADDD3919354F060076033B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8CADDD3A19354F120076033B /* image.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

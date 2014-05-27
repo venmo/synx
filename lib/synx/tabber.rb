@@ -21,7 +21,7 @@ module Synx
       end
 
       def puts(str="")
-        Kernel.puts @@tabbing + str
+        Kernel.puts @@tabbing + str.to_s
       end
 
       def a_single_tab

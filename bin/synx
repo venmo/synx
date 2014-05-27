@@ -6,9 +6,11 @@ require File.join(File.dirname(__FILE__), '..', 'lib', 'synx')
 Clamp do
 
   parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
+  option "--prune", :flag, "remove source files and image resources that are not referenced by the the xcode project"
 
   def execute
-    Synx::Project.open(xcodeproj_path).sync
+    project = Synx::Project.open(xcodeproj_path)
+    project.sync(:prune => prune)
   end
 
 end

@@ -38,13 +38,6 @@ module Xcodeproj
           raise NotImplementedError
         end
 
-        def output
-          removed_from_groups = "(had multiple parent groups, removed from groups: #{@removed_from_groups.join(", ")})" if @removed_from_groups.count > 0
-          str_output = "#{basename} #{build_settings_ammended} #{removed_from_groups}"
-          str_output = str_output.yellow if removed_from_groups
-          str_output
-        end
-
       end
     end
   end

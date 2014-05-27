@@ -1,4 +1,8 @@
 dummy:
+  Resources:
+    image.png:
+  data.json:
+  image-not-in-xcodeproj.png:
   AlreadySynced:
     Core Data.xcdatamodeld:
       Core Data.xcdatamodel:
@@ -15,6 +19,7 @@ dummy:
     NSObject+abc.m:
     Woot.h:
     Woot.m:
+    stuff.xml:
   GroupThatDoubleReferencesFile:
     ManyFiles.h:
     ManyFiles.m:
