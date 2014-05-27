@@ -32,9 +32,7 @@ module Xcodeproj
             Dir[real_path.to_s + "/*"].each do |entry|
               entry_pathname = real_path + entry
               unless has_entry?(entry_pathname)
-                FileUtils.mv(entry_pathname.realpath, work_pathname.to_s)
-
-                puts_unused_file(entry_pathname)
+                handle_unused_entry(entry_pathname)
               end
             end
             all_groups.each(&:move_entries_not_in_xcodeproj)
@@ -64,17 +62,32 @@ module Xcodeproj
         end
         private :variant_groups
 
-        def puts_unused_file(file_pathname)
+        def handle_unused_entry(entry_pathname)
+          if entry_pathname.directory?
+            project.pathname_to_work_pathname(entry_pathname).mkdir
+            # recurse
+            Synx::Tabber.puts entry_pathname.basename.to_s.green
+            Synx::Tabber.increase
+            entry_pathname.children.each { |child| handle_unused_entry(child) }
+            Synx::Tabber.decrease
+          elsif entry_pathname.file?
+            handle_unused_file(entry_pathname)
+          end
+        end
+        private :handle_unused_entry
+
+        def handle_unused_file(file_pathname)
           source_file_extensions = %W(.h .m .mm .c)
+
+          FileUtils.mv(file_pathname.realpath, project.pathname_to_work_pathname(file_pathname.parent).realpath)
 
           output = file_pathname.basename.to_s
           if source_file_extensions.include?(file_pathname.extname)
             output = "#{output} (source file that is not included in Xcode project)".yellow
           end
-
           Synx::Tabber.puts output
         end
-        private :puts_unused_file
+        private :handle_unused_file
 
         def squash_duplicate_file_references
           files.each { |f| f.ensure_internal_consistency(self) }
