@@ -13,6 +13,7 @@
 		8C2DEB8A191D4068003A1F44 /* Core Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB88191D4068003A1F44 /* Core Data.xcdatamodeld */; };
 		8C2DEB90191D4101003A1F44 /* NSObject+abc.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB8F191D4101003A1F44 /* NSObject+abc.m */; };
 		8C2DEB94191D4167003A1F44 /* Wowwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB93191D4167003A1F44 /* Wowwww.m */; };
+		8C2DEB94191D4167003A1F4B /* Wowwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB93191D4167003A1F4B /* Wowwww.m */; };
 		8C848C4C190DB9B300E9727B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C848C4B190DB9B300E9727B /* Foundation.framework */; };
 		8C848C51190DB9B300E9727B /* dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C848C50190DB9B300E9727B /* dummy.h */; };
 		8C848C53190DB9B300E9727B /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C848C52190DB9B300E9727B /* dummy.m */; };
@@ -62,6 +63,7 @@
 		8C2DEB8F191D4101003A1F44 /* NSObject+abc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+abc.m"; path = "FolderNotInXcodeProj/NSObject+abc.m"; sourceTree = "<group>"; };
 		8C2DEB92191D4167003A1F44 /* Wowwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wowwww.h; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.h; sourceTree = SOURCE_ROOT; };
 		8C2DEB93191D4167003A1F44 /* Wowwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wowwww.m; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m; sourceTree = SOURCE_ROOT; };
+		8C2DEB93191D4167003A1F4B /* Wowwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wowwww.m; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m; sourceTree = SOURCE_ROOT; };
 		8C848C48190DB9B300E9727B /* libdummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C848C4B190DB9B300E9727B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8C848C4F190DB9B300E9727B /* dummy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummy-Prefix.pch"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				8C2DEB92191D4167003A1F44 /* Wowwww.h */,
 				8C2DEB93191D4167003A1F44 /* Wowwww.m */,
+				8C2DEB93191D4167003A1F4B /* Wowwww.m */,
 			);
 			path = VeryChildGroup;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				8C2DEB7F191D3F5C003A1F44 /* ManyFiles.m in Sources */,
 				8C2DEB87191D404A003A1F44 /* Woot.m in Sources */,
 				8C2DEB94191D4167003A1F44 /* Wowwww.m in Sources */,
+				8C2DEB94191D4167003A1F4B /* Wowwww.m in Sources */,
 				8C848C53190DB9B300E9727B /* dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

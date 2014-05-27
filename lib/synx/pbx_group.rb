@@ -10,6 +10,7 @@ module Xcodeproj
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
 
+            squash_duplicate_file_references
             work_pathname.mkpath
             files.each { |pbx_file| pbx_file.sync(self) }
             all_groups.each { |group| group.sync }
@@ -73,6 +74,28 @@ module Xcodeproj
           Synx::Tabber.puts output
         end
         private :puts_unused_file
+
+        def squash_duplicate_file_references
+          files.each { |f| f.ensure_internal_consistency(self) }
+
+          grouped_by_path = files.group_by do |file|
+            file.real_path.cleanpath
+          end
+
+          duplicates = grouped_by_path.select do |file_path, files|
+            files.count > 1
+          end
+
+          duplicates.each do |file_path, files|
+            file = files.last
+            # Removes all references (files array)
+            remove_reference(file)
+            # Adds just one back
+            self << file
+            Synx::Tabber.puts "#{file.basename}: removed duplicate reference".red
+          end
+        end
+        private :squash_duplicate_file_references
 
       end
     end

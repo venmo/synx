@@ -6,7 +6,6 @@ module Xcodeproj
       class PBXFileReference
         
         def sync(group)
-          ensure_internal_consistency(group)
           if should_sync?
             if should_move?
               FileUtils.mv(real_path.to_s, group.work_pathname.to_s)
