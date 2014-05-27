@@ -44,25 +44,6 @@ module Xcodeproj
         end
         private :should_move?
 
-        def ensure_internal_consistency(group)
-          @removed_from_groups = []
-          if referring_groups.count > 1
-            # Files should only have one referring group -- this is an internal consistency issue if there is more than 1.
-            # Just remove all referring groups but the one we're syncing with
-
-            referring_groups.each do |rg|
-              unless rg == group
-                rg.remove_reference(self) unless rg == group
-                @removed_from_groups << rg.hierarchy_path
-              end
-            end
-
-          end
-
-          # Duplicates for some reason?
-          @removed_from_groups.uniq! 
-        end
-
         # Fixes things like pch, info.plist references being changed
         def change_build_settings_reference
           @setting_keys_changed = []

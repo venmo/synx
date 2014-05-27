@@ -21,7 +21,7 @@ module Synx
     def sync
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
-      main_group.all_groups.each(&:sync)
+      main_group.all_groups.each { |gr| gr.sync(main_group) }
       puts "\n\n"
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)

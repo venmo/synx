@@ -197,6 +197,7 @@
 		8C848C61190DB9B300E9727B /* dummyTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CADDD36193515B70076033B /* Other Files */,
 				8C848C67190DB9B300E9727B /* dummyTests.m */,
 				8C848C62190DB9B300E9727B /* Supporting Files */,
 			);
@@ -211,6 +212,14 @@
 				8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8CADDD36193515B70076033B /* Other Files */ = {
+			isa = PBXGroup;
+			children = (
+			8C848C64190DB9B300E9727B /* InfoPlist.strings */,
+			);
+			name = "Other Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

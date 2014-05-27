@@ -5,7 +5,8 @@ module Xcodeproj
     module Object
       class PBXGroup
         
-        def sync
+        def sync(group)
+          ensure_internal_consistency(group)
           unless excluded_from_sync?
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
@@ -13,7 +14,7 @@ module Xcodeproj
             squash_duplicate_file_references
             work_pathname.mkpath
             files.each { |pbx_file| pbx_file.sync(self) }
-            all_groups.each { |group| group.sync }
+            all_groups.each { |group| group.sync(self) }
             sync_path
 
             Synx::Tabber.decrease
