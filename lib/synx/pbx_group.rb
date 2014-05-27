@@ -27,8 +27,8 @@ module Xcodeproj
 
         def move_entries_not_in_xcodeproj
           unless excluded_from_sync?
-            Synx::Tabber.increase
             Synx::Tabber.puts "#{basename}/".green
+            Synx::Tabber.increase
             Dir[real_path.to_s + "/*"].each do |entry|
               entry_pathname = real_path + entry
               unless has_entry?(entry_pathname)
