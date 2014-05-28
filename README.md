@@ -6,20 +6,13 @@
 
 A command-line tool that automagically reorganizes your Xcode project folder.
 
-#### OCMock, before Synx
-
 ##### Xcode
 
 ![OCMock Xcode](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Xcode.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLVhjb2RlLmpwZyIsImV4cGlyZXMiOjE0MDE4NTY2ODN9--31a4b1efc4d430c586a51579a5056d5e98f1e411)
 
 ##### Finder
-![OCMock Before](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Finder-Before.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLUZpbmRlci1CZWZvcmUuanBnIiwiZXhwaXJlcyI6MTQwMTg1NjU4NX0%3D--b0be5c1d488759ed367510f825191837e35258e6)
 
-#### OCMock, afer Synx
-
-##### Finder
-
-![OCMock After](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Finder-After.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLUZpbmRlci1BZnRlci5qcGciLCJleHBpcmVzIjoxNDAxODU2NjU5fQ%3D%3D--1fe38806260fe0cb8ea47ec93b84c1c3482e3d18)
+![OCMock Before/After](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Finder-Before-After.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLUZpbmRlci1CZWZvcmUtQWZ0ZXIuanBnIiwiZXhwaXJlcyI6MTQwMTkwNTYxM30%3D--efa637e454c3c0b0c20d4701daf43073e2b12bdc)
 
 ## Installation
 
