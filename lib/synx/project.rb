@@ -82,7 +82,7 @@ module Synx
         # Don't check our own default exclusions -- they may not have it in their project.
         unless DEFAULT_EXCLUSIONS.include?(exclusion)
           # remove leading '/' for this check
-          exclusion = exclusion.clone
+          exclusion = exclusion.dup
           exclusion[0] = '' if exclusion[0] == '/'
           unless self[exclusion]
             raise IndexError, "No group #{exclusion} exists"
