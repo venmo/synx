@@ -8,7 +8,7 @@ Clamp do
   parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
   option ["--prune", "-p"], :flag, "remove source files and image resources that are not referenced by the the xcode project"
   option "--no-default-exclusions", :flag, "doesn't use the default exclusions of /Libraries, /Frameworks, and /Products"
-  option ["--exclusion", "-e"], "ignore an Xcode group while syncing", :multivalued => true
+  option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
 
   def execute
     project = Synx::Project.open(xcodeproj_path)
