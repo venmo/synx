@@ -127,6 +127,29 @@ describe Synx::Project do
         verify_group_structure(DUMMY_SYNX_TEST_PROJECT.main_group, expected_group_structure)
       end
     end
+
+    describe "with the no_default_exclusions option toggled" do
+
+      before(:all) do
+        DUMMY_SYNX_TEST_PROJECT.sync(:no_default_exclusions => true)
+      end
+
+      it "should have an empty array for default exclusions" do
+        expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions.count).to eq(0)
+      end
+    end
+
+    describe "with group_exclusions provided as options" do
+
+      before(:all) do
+        DUMMY_SYNX_TEST_PROJECT.sync(:group_exclusions => %W(/dummy /dummy/SuchGroup/VeryChildGroup))
+      end
+
+      it "should add the group exclusions to the array" do
+        expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions.sort).to eq(%W(/Libraries /Products /Frameworks /dummy /dummy/SuchGroup/VeryChildGroup).sort)
+      end
+    end
+
   end
 
   describe "group_exclusions=" do

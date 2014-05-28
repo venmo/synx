@@ -12,12 +12,6 @@ module Synx
 
     attr_accessor :delayed_groups_set_path, :group_exclusions, :prune
 
-    def self.open(project)
-      project = super
-      project.group_exclusions = DEFAULT_EXCLUSIONS
-      project
-    end
-
     def sync(options={})
       set_options(options)
       Synx::Tabber.increase
@@ -29,11 +23,18 @@ module Synx
       transplant_work_project
       Synx::Tabber.decrease
       save
-      options = {}
     end
 
     def set_options(options)
       self.prune = options[:prune]
+
+      if options[:no_default_exclusions]
+        self.group_exclusions = []
+      else
+        self.group_exclusions = DEFAULT_EXCLUSIONS
+      end
+
+      self.group_exclusions |= options[:group_exclusions] if options[:group_exclusions]
     end
     private :set_options
 
@@ -81,6 +82,7 @@ module Synx
         # Don't check our own default exclusions -- they may not have it in their project.
         unless DEFAULT_EXCLUSIONS.include?(exclusion)
           # remove leading '/' for this check
+          exclusion = exclusion.clone
           exclusion[0] = '' if exclusion[0] == '/'
           unless self[exclusion]
             raise IndexError, "No group #{exclusion} exists"

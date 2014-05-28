@@ -7,7 +7,9 @@ module Xcodeproj
         
         def sync(group)
           ensure_internal_consistency(group)
-          unless excluded_from_sync?
+          if excluded_from_sync?
+            Synx::Tabber.puts "#{basename}/ (excluded)".yellow
+          else
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
 
@@ -26,7 +28,9 @@ module Xcodeproj
         end
 
         def move_entries_not_in_xcodeproj
-          unless excluded_from_sync?
+          if excluded_from_sync?
+            Synx::Tabber.puts "#{basename}/ (excluded)".yellow
+          else
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
             Dir[real_path.to_s + "/*"].each do |entry|
