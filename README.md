@@ -1,10 +1,10 @@
 [![Gem Version](https://badge.fury.io/rb/synx.svg)](http://badge.fury.io/rb/synx)
 
+A command-line tool that automagically reorganizes your Xcode project folder.
+
 # Synx
 
 ![Synx Gif](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx.gif?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC5naWYiLCJleHBpcmVzIjoxNDAxODU2NzAyfQ%3D%3D--fc7d8546f3d4860df9024b1ee82ea13b86a2da88)
-
-A command-line tool that automagically reorganizes your Xcode project folder.
 
 ##### Xcode
 
