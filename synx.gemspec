@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Synx::VERSION
   spec.authors       = ["Mark Larsen"]
   spec.email         = ["mark@venmo.com"]
-  spec.summary       = %q{A command-line tool that automagically reorganizes your Xcode project folder.}
+  spec.summary       = %q{A command-line tool that automagically reorganizes your Xcode project folder to match your Xcode groups.}
   spec.description   = <<-DESC
-                       A command-line tool that automagically reorganizes your Xcode project folder.
+                       A command-line tool that automagically reorganizes your Xcode project folder to match your Xcode groups.
                        Parses the .xcodeproj to build the group structure out on the file system.
                        DESC
   spec.homepage      = ""
