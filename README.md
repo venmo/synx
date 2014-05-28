@@ -42,7 +42,9 @@ Execute the command on yor project to have it reorganize the files on the file s
 Synx supports the following options:
 
 ```
---prune, -p                   remove source files and image resources that are not referenced by the the xcode project
+  --prune, -p                   remove source files and image resources that are not referenced by the the xcode project
+  --no-default-exclusions       doesn't use the default exclusions of /Libraries, /Frameworks, and /Products
+  --exclusion, -e EXCLUSION     ignore an Xcode group while syncing
 ```
      
 It may have confused cocoapods. Pod install, if you use them:
