@@ -37,11 +37,21 @@ Or install it yourself as:
 
 ## Usage
 
+### Basic
+
 **WARNING: Make sure that your project is backed up through source control before doing anything**
 
 Execute the command on your project to have it reorganize the files on the file system:
 
      $ synx path/to/my/project.xcodeproj
+     
+It may have confused cocoapods. Pod install, if you use them:
+
+    $ pod
+    
+You're good to go!
+
+### Advanced
 
 Synx supports the following options:
 
@@ -56,13 +66,6 @@ OCMock, for example, could have done:
     $ synx -p -e=OCMock/Core -e=OCKMockTests Source/OCMock.xcodeproj
 
 if they wanted to not sync the `OCMock/Core` and `OCMockTests` groups, and also remove (`-p`) any image/source files found by Synx that weren't ever referenced by any groups in Xcode.
-     
-It may have confused cocoapods. Pod install, if you use them:
-
-    $ pod
-    
-You're good to go!
-
 
 ## Contributing
 
