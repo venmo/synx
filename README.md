@@ -37,7 +37,7 @@ Or install it yourself as:
 
 **WARNING: Make sure that your project is backed up through source control before doing anything**
 
-Execute the command on yor project to have it reorganize the files on the file system:
+Execute the command on your project to have it reorganize the files on the file system:
 
      $ synx path/to/my/project.xcodeproj
 
