@@ -61,5 +61,5 @@ if they wanted to not sync the `OCMock/Core` and `OCMockTests` groups, and also 
 
 ## Contributors
 
-* @virajbindra, awesome logo!
+* @vrjbndr, awesome logo!
 * @ayanonagon and @benzguo, feedback.
