@@ -1,0 +1,44 @@
+dummy:
+  Resources:
+    image.png:
+  data.json:
+  image-not-in-xcodeproj.png:
+  AlreadySynced:
+    Core Data.xcdatamodeld:
+      Core Data.xcdatamodel:
+        contents:
+      Core Data 2.xcdatamodel:
+        contents:
+      Core Data 3.xcdatamodel:
+        contents:
+      Core Data 4.xcdatamodel:
+        contents:
+    FolderNotInXcodeProj:
+      AnotherFileNotInXcodeProj.h:
+    NSObject+abc.h:
+    NSObject+abc.m:
+    Woot.h:
+    Woot.m:
+    stuff.xml:
+  GroupThatDoubleReferencesFile:
+    ManyFiles.h:
+    ManyFiles.m:
+  Supporting Files:
+    dummy-Prefix.pch:
+  dummy.h:
+  dummy.m:
+  FileNotInXcodeProj.h:
+  SuchGroup:
+    Wow.h:
+    Wow.m:
+    VeryChildGroup:
+      Wowwww.h:
+      Wowwww.m:
+dummyTests:
+  Other Files:
+    en.lproj:
+      InfoPlist.strings:
+  Supporting Files:
+    dummyTests-Prefix.pch:
+    dummyTests-Info.plist:
+  dummyTests.m:

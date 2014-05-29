@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2DEB7F191D3F5C003A1F44 /* ManyFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */; };
+		8C2DEB82191D3F68003A1F44 /* Wow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB81191D3F68003A1F44 /* Wow.m */; };
+		8C2DEB87191D404A003A1F44 /* Woot.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB86191D404A003A1F44 /* Woot.m */; };
+		8C2DEB8A191D4068003A1F44 /* Core Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB88191D4068003A1F44 /* Core Data.xcdatamodeld */; };
+		8C2DEB90191D4101003A1F44 /* NSObject+abc.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB8F191D4101003A1F44 /* NSObject+abc.m */; };
+		8C2DEB94191D4167003A1F44 /* Wowwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB93191D4167003A1F44 /* Wowwww.m */; };
+		8C2DEB94191D4167003A1F4B /* Wowwww.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB93191D4167003A1F4B /* Wowwww.m */; };
 		8C848C4C190DB9B300E9727B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C848C4B190DB9B300E9727B /* Foundation.framework */; };
 		8C848C51190DB9B300E9727B /* dummy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C848C50190DB9B300E9727B /* dummy.h */; };
 		8C848C53190DB9B300E9727B /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C848C52190DB9B300E9727B /* dummy.m */; };
@@ -42,6 +49,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C2DEB7D191D3F5C003A1F44 /* ManyFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManyFiles.h; sourceTree = "<group>"; };
+		8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManyFiles.m; sourceTree = "<group>"; };
+		8C2DEB80191D3F68003A1F44 /* Wow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wow.h; sourceTree = "<group>"; };
+		8C2DEB81191D3F68003A1F44 /* Wow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wow.m; sourceTree = "<group>"; };
+		8C2DEB85191D404A003A1F44 /* Woot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Woot.h; sourceTree = "<group>"; };
+		8C2DEB86191D404A003A1F44 /* Woot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Woot.m; sourceTree = "<group>"; };
+		8C2DEB89191D4068003A1F44 /* Core Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data.xcdatamodel"; sourceTree = "<group>"; };
+		8C2DEB8B191D4087003A1F44 /* Core Data 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data 2.xcdatamodel"; sourceTree = "<group>"; };
+		8C2DEB8C191D408D003A1F44 /* Core Data 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data 3.xcdatamodel"; sourceTree = "<group>"; };
+		8C2DEB8D191D4092003A1F44 /* Core Data 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core Data 4.xcdatamodel"; sourceTree = "<group>"; };
+		8C2DEB8E191D4101003A1F44 /* NSObject+abc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+abc.h"; path = "FolderNotInXcodeProj/NSObject+abc.h"; sourceTree = "<group>"; };
+		8C2DEB8F191D4101003A1F44 /* NSObject+abc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+abc.m"; path = "FolderNotInXcodeProj/NSObject+abc.m"; sourceTree = "<group>"; };
+		8C2DEB92191D4167003A1F44 /* Wowwww.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Wowwww.h; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.h; sourceTree = SOURCE_ROOT; };
+		8C2DEB93191D4167003A1F44 /* Wowwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wowwww.m; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m; sourceTree = SOURCE_ROOT; };
+		8C2DEB93191D4167003A1F4B /* Wowwww.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Wowwww.m; path = dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m; sourceTree = SOURCE_ROOT; };
 		8C848C48190DB9B300E9727B /* libdummy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdummy.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C848C4B190DB9B300E9727B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8C848C4F190DB9B300E9727B /* dummy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummy-Prefix.pch"; sourceTree = "<group>"; };
@@ -53,6 +75,8 @@
 		8C848C63190DB9B300E9727B /* dummyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "dummyTests-Info.plist"; sourceTree = "<group>"; };
 		8C848C65190DB9B300E9727B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C848C67190DB9B300E9727B /* dummyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dummyTests.m; sourceTree = "<group>"; };
+		8CADDD3A19354F120076033B /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummyTests-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +102,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C2DEB7C191D3F16003A1F44 /* SuchGroup */ = {
+			isa = PBXGroup;
+			children = (
+				8C2DEB91191D4137003A1F44 /* VeryChildGroup */,
+				8C2DEB7D191D3F5C003A1F44 /* ManyFiles.h */,
+				8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */,
+				8C2DEB80191D3F68003A1F44 /* Wow.h */,
+				8C2DEB81191D3F68003A1F44 /* Wow.m */,
+			);
+			name = SuchGroup;
+			sourceTree = "<group>";
+		};
+		8C2DEB83191D3F9E003A1F44 /* GroupThatDoubleReferencesFile */ = {
+			isa = PBXGroup;
+			children = (
+				8C2DEB7D191D3F5C003A1F44 /* ManyFiles.h */,
+				8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */,
+			);
+			name = GroupThatDoubleReferencesFile;
+			sourceTree = "<group>";
+		};
+		8C2DEB84191D402E003A1F44 /* AlreadySynced */ = {
+			isa = PBXGroup;
+			children = (
+				8C2DEB85191D404A003A1F44 /* Woot.h */,
+				8C2DEB86191D404A003A1F44 /* Woot.m */,
+				8C2DEB88191D4068003A1F44 /* Core Data.xcdatamodeld */,
+				8C2DEB8E191D4101003A1F44 /* NSObject+abc.h */,
+				8C2DEB8F191D4101003A1F44 /* NSObject+abc.m */,
+			);
+			path = AlreadySynced;
+			sourceTree = "<group>";
+		};
+		8C2DEB91191D4137003A1F44 /* VeryChildGroup */ = {
+			isa = PBXGroup;
+			children = (
+				8C2DEB92191D4167003A1F44 /* Wowwww.h */,
+				8C2DEB93191D4167003A1F44 /* Wowwww.m */,
+				8C2DEB93191D4167003A1F4B /* Wowwww.m */,
+			);
+			path = VeryChildGroup;
+			sourceTree = "<group>";
+		};
 		8C848C3F190DB9B300E9727B = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +177,10 @@
 		8C848C4D190DB9B300E9727B /* dummy */ = {
 			isa = PBXGroup;
 			children = (
+				8CADDD3919354F060076033B /* Resources */,
+				8C2DEB84191D402E003A1F44 /* AlreadySynced */,
+				8C2DEB83191D3F9E003A1F44 /* GroupThatDoubleReferencesFile */,
+				8C2DEB7C191D3F16003A1F44 /* SuchGroup */,
 				8C848C50190DB9B300E9727B /* dummy.h */,
 				8C848C52190DB9B300E9727B /* dummy.m */,
 				8C848C4E190DB9B300E9727B /* Supporting Files */,
@@ -128,6 +199,7 @@
 		8C848C61190DB9B300E9727B /* dummyTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CADDD36193515B70076033B /* Other Files */,
 				8C848C67190DB9B300E9727B /* dummyTests.m */,
 				8C848C62190DB9B300E9727B /* Supporting Files */,
 			);
@@ -139,8 +211,25 @@
 			children = (
 				8C848C63190DB9B300E9727B /* dummyTests-Info.plist */,
 				8C848C64190DB9B300E9727B /* InfoPlist.strings */,
+				8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8CADDD36193515B70076033B /* Other Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C848C64190DB9B300E9727B /* InfoPlist.strings */,
+			);
+			name = "Other Files";
+			sourceTree = "<group>";
+		};
+		8CADDD3919354F060076033B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8CADDD3A19354F120076033B /* image.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +313,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2DEB82191D3F68003A1F44 /* Wow.m in Sources */,
+				8C2DEB8A191D4068003A1F44 /* Core Data.xcdatamodeld in Sources */,
+				8C2DEB90191D4101003A1F44 /* NSObject+abc.m in Sources */,
+				8C2DEB7F191D3F5C003A1F44 /* ManyFiles.m in Sources */,
+				8C2DEB87191D404A003A1F44 /* Woot.m in Sources */,
+				8C2DEB94191D4167003A1F44 /* Wowwww.m in Sources */,
+				8C2DEB94191D4167003A1F4B /* Wowwww.m in Sources */,
 				8C848C53190DB9B300E9727B /* dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +455,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dummy/dummy-Prefix.pch";
+				GCC_PREFIX_HEADER = "dummyTests/Supporting Files/dummyTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -379,7 +475,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dummy/dummy-Prefix.pch";
+				GCC_PREFIX_HEADER = "dummyTests/Supporting Files/dummyTests-Prefix.pch";
 				INFOPLIST_FILE = "dummyTests/dummyTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -405,6 +501,7 @@
 				8C848C6D190DB9B300E9727B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C848C6E190DB9B300E9727B /* Build configuration list for PBXNativeTarget "dummyTests" */ = {
 			isa = XCConfigurationList;
@@ -413,8 +510,25 @@
 				8C848C70190DB9B300E9727B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8C2DEB88191D4068003A1F44 /* Core Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8C2DEB8B191D4087003A1F44 /* Core Data 2.xcdatamodel */,
+				8C2DEB8C191D408D003A1F44 /* Core Data 3.xcdatamodel */,
+				8C2DEB8D191D4092003A1F44 /* Core Data 4.xcdatamodel */,
+				8C2DEB89191D4068003A1F44 /* Core Data.xcdatamodel */,
+			);
+			currentVersion = 8C2DEB8C191D408D003A1F44 /* Core Data 3.xcdatamodel */;
+			path = "Core Data.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8C848C40190DB9B300E9727B /* Project object */;
 }

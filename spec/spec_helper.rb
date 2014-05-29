@@ -1,7 +1,7 @@
 require 'bundler/setup'
 Bundler.setup
 
-require 'synxronize'
+require 'synx'
 require 'pry'
 
 RSpec.configure do |config|

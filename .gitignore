@@ -40,3 +40,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 *.DS_Store
+
+
+# Spec
+spec/test_dummy/

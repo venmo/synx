@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'clamp'
+require File.join(File.dirname(__FILE__), '..', 'lib', 'synx')
+
+Clamp do
+
+  parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
+  option ["--prune", "-p"], :flag, "remove source files and image resources that are not referenced by the the xcode project"
+  option "--no-default-exclusions", :flag, "doesn't use the default exclusions of /Libraries, /Frameworks, and /Products"
+  option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
+
+  def execute
+    project = Synx::Project.open(xcodeproj_path)
+    project.sync(:prune => prune?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
+  end
+
+end
