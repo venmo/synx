@@ -1,4 +1,6 @@
 dummy:
+  FolderWithGroupNotLinked:
+    data.json:
   Resources:
     image.png:
   data.json:
