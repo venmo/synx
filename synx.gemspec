@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Synx::VERSION
   spec.authors       = ["Mark Larsen"]
   spec.email         = ["mark@venmo.com"]
-  spec.summary       = %q{A command-line tool that automagically reorganizes your Xcode project folder to match your Xcode groups.}
+  spec.summary       = %q{A command-line tool that reorganizes your Xcode project folder to match your Xcode groups}
   spec.description   = <<-DESC
-                       A command-line tool that automagically reorganizes your Xcode project folder to match your Xcode groups.
-                       Synx parses the .xcodeproj to build the same group structure out on the file system.
+                       A command-line tool that reorganizes your Xcode project folder to match your Xcode groups
+                       Synx parses your .xcodeproj to build the same group structure out on the file system.
                        DESC
   spec.homepage      = "https://github.com/venmo/synx"
   spec.license       = "MIT"
