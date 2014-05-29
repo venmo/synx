@@ -6,6 +6,19 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8CDA046A1937DDAA004435A1 /* Aggregate Target */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8CDA046D1937DDAA004435A1 /* Build configuration list for PBXAggregateTarget "Aggregate Target" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = "Aggregate Target";
+			productName = "Aggregate Target";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8C2DEB7F191D3F5C003A1F44 /* ManyFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */; };
 		8C2DEB82191D3F68003A1F44 /* Wow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DEB81191D3F68003A1F44 /* Wow.m */; };
@@ -303,6 +316,7 @@
 			targets = (
 				8C848C47190DB9B300E9727B /* dummy */,
 				8C848C57190DB9B300E9727B /* dummyTests */,
+				8CDA046A1937DDAA004435A1 /* Aggregate Target */,
 			);
 		};
 /* End PBXProject section */
@@ -492,6 +506,20 @@
 			};
 			name = Release;
 		};
+		8CDA046B1937DDAA004435A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8CDA046C1937DDAA004435A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -521,6 +549,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8CDA046D1937DDAA004435A1 /* Build configuration list for PBXAggregateTarget "Aggregate Target" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CDA046B1937DDAA004435A1 /* Debug */,
+				8CDA046C1937DDAA004435A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

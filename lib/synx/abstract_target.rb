@@ -3,7 +3,7 @@ require 'xcodeproj'
 module Xcodeproj
   class Project
     module Object
-      class PBXNativeTarget
+      class AbstractTarget
 
         def each_build_settings
           build_configurations.each { |bc| yield bc.build_settings }
