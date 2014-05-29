@@ -48,8 +48,12 @@ module Xcodeproj
         def change_build_settings_reference
           @setting_keys_changed = []
           return unless basename =~ /\.(pch|plist)$/
-          
-          project.targets.each do |t|
+
+          native_targets = project.targets.select do |target|
+            target.kind_of?(Xcodeproj::Project::Object::PBXNativeTarget)
+          end
+
+          native_targets.each do |t|
             t.each_build_settings do |bs|
               ["INFOPLIST_FILE", "GCC_PREFIX_HEADER"].each do |setting_key|
                 setting_value = bs[setting_key]
