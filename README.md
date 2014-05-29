@@ -69,3 +69,8 @@ if they wanted to not sync the `OCMock/Core` and `OCMockTests` groups, and also 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Contributors
+
+* @virajbindra, awesome logo!
+* @ayanonagon and @benzguo, feedback.
