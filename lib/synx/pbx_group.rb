@@ -77,7 +77,6 @@ module Xcodeproj
             Synx::Tabber.puts entry_pathname.basename.to_s.green
             Synx::Tabber.increase
             entry_pathname.children.each { |child| handle_unused_entry(child) }
-            entry_pathname.rmtree
             Synx::Tabber.decrease
           elsif entry_pathname.file?
             handle_unused_file(entry_pathname)
