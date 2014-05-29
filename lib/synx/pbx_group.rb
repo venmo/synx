@@ -51,26 +51,11 @@ module Xcodeproj
         private :sync_path
 
         def has_entry?(entry_pathname)
-          return true if %W(. ..).include?(entry_pathname.basename.to_s)
-
-          entry_pathname.realpath.cleanpath.each_filename.to_a
-          children.any? do |child|
-            prepare_pathname_for_equality(child.real_path).cleanpath == prepare_pathname_for_equality(entry_pathname).realpath.cleanpath
+          %W(. ..).include?(entry_pathname.basename.to_s) || children.any? do |child|
+            child.real_path.cleanpath == entry_pathname.realpath.cleanpath
           end
         end
         private :has_entry?
-
-        def prepare_pathname_for_equality(pathname)
-          # If entry_pathname is a directory, it's case insensitive. We just care about the final filename downcasing.
-          if pathname.directory?
-            filenames = pathname.realpath.each_filename.to_a
-            filenames.last.downcase!
-            Pathname("/" + filenames.join(File::SEPARATOR))
-          else
-            pathname
-          end
-        end
-        private :prepare_pathname_for_equality
 
         def all_groups
           groups | version_groups | variant_groups
@@ -83,7 +68,11 @@ module Xcodeproj
 
         def handle_unused_entry(entry_pathname)
           if entry_pathname.directory?
-            project.pathname_to_work_pathname(entry_pathname).mkdir
+            work_entry_pathname = project.pathname_to_work_pathname(entry_pathname)
+            # The directory may have already been created for one of two reasons
+            # 1. It was created as a piece of another path, ie, /this/middle/directory.mkdir got called.
+            # 2. OS X has case insensitive folder names, so has_entry may have failed to notice it had the folder.
+            work_entry_pathname.mkdir unless work_entry_pathname.exist?
             # recurse
             Synx::Tabber.puts entry_pathname.basename.to_s.green
             Synx::Tabber.increase
