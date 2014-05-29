@@ -1,4 +1,4 @@
-Copyright (c) 2014 Mark Larsen
+Copyright (c) 2014 Venmo
 
 MIT License
 
