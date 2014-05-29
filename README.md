@@ -1,18 +1,18 @@
 [![Gem Version](https://badge.fury.io/rb/synx.svg)](http://badge.fury.io/rb/synx)
 
-# Synx
+![synx logo](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx-logo.png?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC1sb2dvLnBuZyIsImV4cGlyZXMiOjE0MDE5MzExNDF9--6c8a22318eaafed2185cb16d39189dcadb75c742)
 
 A command-line tool that automagically reorganizes your Xcode project folder.
 
-![Synx Gif](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx.gif?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC5naWYiLCJleHBpcmVzIjoxNDAxODU2NzAyfQ%3D%3D--fc7d8546f3d4860df9024b1ee82ea13b86a2da88)
+![synx gif](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx.gif?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC5naWYiLCJleHBpcmVzIjoxNDAxODU2NzAyfQ%3D%3D--fc7d8546f3d4860df9024b1ee82ea13b86a2da88)
 
 ##### Xcode
 
-![OCMock Xcode](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Xcode.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLVhjb2RlLmpwZyIsImV4cGlyZXMiOjE0MDE4NTY2ODN9--31a4b1efc4d430c586a51579a5056d5e98f1e411)
+![synx Xcode](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx-Xcode.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC1YY29kZS5qcGciLCJleHBpcmVzIjoxNDAxOTMxMDY5fQ%3D%3D--969e312f6ee33430855c495f25d9f5ff78fa9e96)
 
 ##### Finder
 
-![OCMock Before/After](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/OCMock-Finder-Before-After.jpg?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvT0NNb2NrLUZpbmRlci1CZWZvcmUtQWZ0ZXIuanBnIiwiZXhwaXJlcyI6MTQwMTkwNTYxM30%3D--efa637e454c3c0b0c20d4701daf43073e2b12bdc)
+![synx finder before/after](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx-finder-before-after.png?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC1maW5kZXItYmVmb3JlLWFmdGVyLnBuZyIsImV4cGlyZXMiOjE0MDE5MzEwOTd9--8cff7616e4af2f6f2eed624623092745184c0235)
 
 ## Installation
 
