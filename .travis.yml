@@ -1,3 +1,2 @@
-language: ruby
-rvm:
-  - 2.0.0-p353
+language: objective-c
+script: bundle exec rspec
