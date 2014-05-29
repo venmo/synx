@@ -31,7 +31,7 @@ Execute the command on your project to have it reorganize the files on the file 
      
 It may have confused cocoapods. Pod install, if you use them:
 
-    $ pod
+    $ pod install
     
 You're good to go!
 
