@@ -68,7 +68,11 @@ module Xcodeproj
 
         def handle_unused_entry(entry_pathname)
           if entry_pathname.directory?
-            project.pathname_to_work_pathname(entry_pathname).mkdir
+            work_entry_pathname = project.pathname_to_work_pathname(entry_pathname)
+            # The directory may have already been created for one of two reasons
+            # 1. It was created as a piece of another path, ie, /this/middle/directory.mkdir got called.
+            # 2. OS X has case insensitive folder names, so has_entry may have failed to notice it had the folder.
+            work_entry_pathname.mkdir unless work_entry_pathname.exist?
             # recurse
             Synx::Tabber.puts entry_pathname.basename.to_s.green
             Synx::Tabber.increase
