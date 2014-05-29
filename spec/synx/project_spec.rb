@@ -102,7 +102,7 @@ describe Synx::Project do
         end
 
         # dummyTests target
-        DUMMY_SYNX_TEST_PROJECT.targets.last.each_build_settings do |bs|
+        DUMMY_SYNX_TEST_PROJECT.targets[1].each_build_settings do |bs|
           expect(bs["GCC_PREFIX_HEADER"]).to eq("dummyTests/Supporting Files/dummyTests-Prefix.pch")
           expect(bs["INFOPLIST_FILE"]).to eq("dummyTests/Supporting Files/dummyTests-Info.plist")
         end
