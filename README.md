@@ -3,7 +3,7 @@
 
 ![synx logo](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx-logo.png?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC1sb2dvLnBuZyIsImV4cGlyZXMiOjE0MDE5MzExNDF9--6c8a22318eaafed2185cb16d39189dcadb75c742)
 
-A command-line tool that automagically reorganizes your Xcode project folder.
+A command-line tool that reorganizes your Xcode project folder to match your Xcode groups.
 
 ![synx gif](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx.gif?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC5naWYiLCJleHBpcmVzIjoxNDAxODU2NzAyfQ%3D%3D--fc7d8546f3d4860df9024b1ee82ea13b86a2da88)
 
