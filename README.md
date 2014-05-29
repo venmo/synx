@@ -1,5 +1,5 @@
-[![Gem Version](https://badge.fury.io/rb/synx.svg)](http://badge.fury.io/rb/synx)
-[![Travis](https://travis-ci.org/venmo/synx.svg?branch=master)
+![Gem Version](https://badge.fury.io/rb/synx.svg)](http://badge.fury.io/rb/synx)
+![Travis](https://travis-ci.org/venmo/synx.svg?branch=master)
 
 ![synx logo](https://raw.githubusercontent.com/venmo/synx/marklarr/dev/docs/images/synx-logo.png?token=760261__eyJzY29wZSI6IlJhd0Jsb2I6dmVubW8vc3lueC9tYXJrbGFyci9kZXYvZG9jcy9pbWFnZXMvc3lueC1sb2dvLnBuZyIsImV4cGlyZXMiOjE0MDE5MzExNDF9--6c8a22318eaafed2185cb16d39189dcadb75c742)
 
