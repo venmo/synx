@@ -47,9 +47,9 @@ Synx supports the following options:
 
 OCMock, for example, could have done:
 
-    $ synx -p -e /OCMock/Core -e /OCKMockTests Source/OCMock.xcodeproj
+    $ synx -e "/OCMock/Core Mocks" -e /OCMockTests Source/OCMock.xcodeproj/
 
-if they wanted to not sync the `OCMock/Core` and `OCMockTests` groups, and also remove (`-p`) any image/source files found by synx that weren't ever referenced by any groups in Xcode.
+if they wanted to not sync the `/OCMock/Core Mocks` and `/OCMockTests` groups, and also remove (`-p`) any image/source files found by synx that weren't ever referenced by any groups in Xcode.
 
 ## Contributing
 
