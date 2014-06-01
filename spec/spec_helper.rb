@@ -2,7 +2,7 @@ require 'bundler/setup'
 Bundler.setup
 
 require 'synx'
-require 'pry-debugger'
+require 'pry'
 
 DUMMY_SYNX_PATH = File.join(File.dirname(__FILE__), 'dummy')
 DUMMY_SYNX_TEST_PATH = File.join(File.dirname(__FILE__), 'test_dummy')
