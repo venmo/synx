@@ -3,9 +3,6 @@ Bundler.setup
 
 require 'synx'
 require 'pry-debugger'
-require 'coveralls'
-
-Coveralls.wear!
 
 DUMMY_SYNX_PATH = File.join(File.dirname(__FILE__), 'dummy')
 DUMMY_SYNX_TEST_PATH = File.join(File.dirname(__FILE__), 'test_dummy')
