@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Synx::Tabber do
 
-  after(:each) do
+  before(:each) do
     Synx::Tabber.reset
   end
 
