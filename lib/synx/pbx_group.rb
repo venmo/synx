@@ -124,6 +124,17 @@ module Xcodeproj
         end
         private :squash_duplicate_file_references
 
+        def groups_containing_forward_slash
+          found_groups = []
+          groups.each do |group|
+            unless group.excluded_from_sync?
+              found_groups << group if group.basename.include?("/")
+              found_groups |= group.groups_containing_forward_slash
+            end
+          end
+          found_groups
+        end
+
       end
     end
   end

@@ -14,6 +14,7 @@ module Synx
 
     def sync(options={})
       set_options(options)
+      presync_check
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
       main_group.all_groups.each { |gr| gr.sync(main_group) }
@@ -23,6 +24,18 @@ module Synx
       transplant_work_project
       Synx::Tabber.decrease
       save
+    end
+
+    def presync_check
+      forward_slash_groups = main_group.groups_containing_forward_slash
+      unless forward_slash_groups.empty?
+        Synx::Tabber.puts "Synx cannot sync projects with groups that contain '/'. Please rename the following groups before running synx again:".yellow
+        Synx::Tabber.increase
+        forward_slash_groups.each do |group|
+          Synx::Tabber.puts group.hierarchy_path
+        end
+        abort
+      end
     end
 
     def set_options(options)
