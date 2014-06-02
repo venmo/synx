@@ -169,7 +169,8 @@ describe Synx::Project do
       group_exclusions = %W(dummy dummy/GroupThatDoubleReferencesFile dummy/SuchGroup/VeryChildGroup)
       DUMMY_SYNX_TEST_PROJECT.group_exclusions = group_exclusions
 
-      expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions).to eq(group_exclusions)
+      expected = %W(/dummy /dummy/GroupThatDoubleReferencesFile /dummy/SuchGroup/VeryChildGroup)
+      expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions).to eq(expected)
     end
   end
 
