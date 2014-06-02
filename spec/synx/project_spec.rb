@@ -164,6 +164,14 @@ describe Synx::Project do
 
       expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions).to eq(group_exclusions)
     end
+
+    it "should be forgiving about missing '/' at beginning of group paths" do
+      group_exclusions = %W(dummy dummy/GroupThatDoubleReferencesFile dummy/SuchGroup/VeryChildGroup)
+      DUMMY_SYNX_TEST_PROJECT.group_exclusions = group_exclusions
+
+      expected = %W(/dummy /dummy/GroupThatDoubleReferencesFile /dummy/SuchGroup/VeryChildGroup)
+      expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions).to eq(expected)
+    end
   end
 
   describe "#root_pathname" do

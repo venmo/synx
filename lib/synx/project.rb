@@ -79,11 +79,13 @@ module Synx
 
     def group_exclusions=(new_exclusions)
       new_exclusions.each do |exclusion|
+        # Group paths always start with a '/', so put one there if it isn't already.
+        exclusion.prepend("/") unless exclusion[0] == "/"
         # Don't check our own default exclusions -- they may not have it in their project.
         unless DEFAULT_EXCLUSIONS.include?(exclusion)
           # remove leading '/' for this check
           exclusion = exclusion.dup
-          exclusion[0] = '' if exclusion[0] == '/'
+          exclusion[0] = ''
           unless self[exclusion]
             raise IndexError, "No group #{exclusion} exists"
           end
