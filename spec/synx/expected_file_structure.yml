@@ -7,6 +7,7 @@ dummy:
   image-not-in-xcodeproj.png:
   AlreadySynced:
     Core Data.xcdatamodeld:
+      .xccurrentversion:
       Core Data.xcdatamodel:
         contents:
       Core Data 2.xcdatamodel:
