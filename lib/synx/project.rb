@@ -87,7 +87,7 @@ module Synx
     end
 
     def pathname_is_inside_root_pathname?(grandchild_pathname)
-      grandchild_pathname.realpath.to_s =~ /^#{root_pathname.realpath.to_s}/
+      grandchild_pathname.realpath.to_s.start_with?(root_pathname.realpath.to_s)
     end
 
     def group_exclusions=(new_exclusions)
