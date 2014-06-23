@@ -28,6 +28,8 @@ dummy:
     ManyFiles.m:
   Supporting Files:
     dummy-Prefix.pch:
+    en.lproj:
+      Localizable.strings:
   dummy.h:
   dummy.m:
   FileNotInXcodeProj.h:
@@ -42,6 +44,6 @@ dummyTests:
     en.lproj:
       InfoPlist.strings:
   Supporting Files:
-    dummyTests-Prefix.pch:
+    dummyTests-prefix.pch:
     dummyTests-Info.plist:
   dummyTests.m:
