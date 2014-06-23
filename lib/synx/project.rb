@@ -18,7 +18,7 @@ module Synx
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
       main_group.all_groups.each { |gr| gr.sync(main_group) }
-      puts "\n\n"
+      puts "\n\n" unless options[:quiet]
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)
       transplant_work_project
@@ -48,6 +48,8 @@ module Synx
       end
 
       self.group_exclusions |= options[:group_exclusions] if options[:group_exclusions]
+
+      Synx::Tabber.quiet = options[:quiet]
     end
     private :set_options
 
