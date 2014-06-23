@@ -89,6 +89,7 @@
 		8C848C65190DB9B300E9727B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C848C67190DB9B300E9727B /* dummyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dummyTests.m; sourceTree = "<group>"; };
 		8CADDD3A19354F120076033B /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		8CD2ABF219558D7800341C58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		8CDA046319374F35004435A1 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = FolderWithGroupNotLinked/data.json; sourceTree = "<group>"; };
 		8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dummyTests-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +207,7 @@
 		8C848C4E190DB9B300E9727B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2ABF019558D4100341C58 /* en.lproj */,
 				8C848C4F190DB9B300E9727B /* dummy-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -245,6 +247,14 @@
 				8CADDD3A19354F120076033B /* image.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8CD2ABF019558D4100341C58 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8CD2ABF119558D7800341C58 /* Localizable.strings */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		8CDA046219374F15004435A1 /* FolderWithGroupNotLinked */ = {
@@ -373,6 +383,14 @@
 				8C848C65190DB9B300E9727B /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8CD2ABF119558D7800341C58 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CD2ABF219558D7800341C58 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -557,6 +575,7 @@
 				8CDA046C1937DDAA004435A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
