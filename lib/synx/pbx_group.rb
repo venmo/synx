@@ -33,7 +33,7 @@ module Xcodeproj
           else
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
-            Dir[real_path.to_s + "/{*,.*}"].each do |entry|
+            Dir[real_path.to_s + "/{*,.*}"].reject { |e| %W(. ..).include?(Pathname(e).basename.to_s) }.each do |entry|
               entry_pathname = real_path + entry
               unless project.has_object_for_pathname?(entry_pathname)
                 handle_unused_entry(entry_pathname)
