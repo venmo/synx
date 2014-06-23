@@ -1,6 +1,7 @@
 module Synx
   class Tabber
 
+    @@quiet = false
     @@tabbing = 0
 
     class << self
@@ -19,10 +20,19 @@ module Synx
 
       def reset
         @@tabbing = 0
+        self.quiet = false
+      end
+
+      def quiet=(quiet)
+        @@quiet = quiet
+      end
+
+      def quiet?
+        @@quiet
       end
 
       def puts(str="")
-        Kernel.puts (a_single_tab * @@tabbing) + str.to_s
+        Kernel.puts (a_single_tab * @@tabbing) + str.to_s unless quiet?
       end
 
       def a_single_tab

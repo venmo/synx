@@ -53,6 +53,13 @@ describe Synx::Tabber do
       expect(Kernel).to receive(:puts).with("      Hello, world.")
       Synx::Tabber.puts("Hello, world.")
     end
+
+    it "should not print anything if quiet is true" do
+      Synx::Tabber.quiet = true
+      Synx::Tabber.increase(3)
+      expect(Kernel).to_not receive(:puts)
+      Synx::Tabber.puts("Hello, world.")
+    end
   end
 
   describe "::a_single_tab" do
