@@ -110,7 +110,13 @@ module Synx
 
     def has_object_for_pathname?(pathname)
       @unmodified_project ||= Synx::Project.open(path)
-      @unmodified_project.objects.any? { |o| begin o.real_path.cleanpath == pathname.cleanpath rescue false end }
+      @unmodified_project.objects.any? do |o| 
+        begin
+          o.real_path.cleanpath == pathname.cleanpath 
+        rescue 
+          false 
+        end
+      end
     end
 
   end
