@@ -22,6 +22,8 @@ dummy:
     ManyFiles.m:
   Supporting Files:
     dummy-Prefix.pch:
+    en.lproj:
+      Localizable.strings:
   dummy.h:
   dummy.m:
   SuchGroup:

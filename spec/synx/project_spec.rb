@@ -40,6 +40,18 @@ describe Synx::Project do
 
         if object.instance_of?(Xcodeproj::Project::Object::PBXGroup)
           object_children ||= {}
+          found_children = object.children.map(&:basename)
+          missing_children_in_group = object_children.keys - found_children
+          extra_children_in_group = found_children - object_children.keys
+          failure_message = "In group #{object.hierarchy_path}:"
+
+          unless missing_children_in_group.empty?
+            failure_message += "\n  Expected to find children: #{missing_children_in_group.join(", ")}"
+          end
+
+          unless extra_children_in_group.empty?
+            failure_message += "\n  Did not expect to find children: #{extra_children_in_group.join(", ")}"
+          end
           failure_message = "Expected #{object_name} to have #{object_children.count} children, found #{object.children.count}"
           expect(object_children.count).to eq(object.children.count), failure_message
           verify_group_structure(object, object_children) if object_children.count > 0
@@ -54,9 +66,20 @@ describe Synx::Project do
 
         if File.directory?(entry_pathname)
           entry_entries ||= {}
-          # '.' and '..' show up in entries, so add 2
-          failure_message = "Expected #{entry_pathname} to have #{entry_entries.count} children, found #{entry_pathname.entries.count - 2}"
-          expect(entry_entries.count + 2).to eq(entry_pathname.entries.count), failure_message
+          found_entries = entry_pathname.entries.reject { |e| [".", ".."].include?(e.to_s) }.map(&:to_s)
+          missing_entries_on_file_system = entry_entries.keys - found_entries
+          extra_entries_on_file_system = found_entries - entry_entries.keys
+          failure_message = "In #{entry_pathname}:"
+
+          unless missing_entries_on_file_system.empty?
+            failure_message += "\n  Expected to find entries: #{missing_entries_on_file_system.join(", ")}"
+          end
+
+          unless extra_entries_on_file_system.empty?
+            failure_message += "\n  Did not expect to find entries: #{extra_entries_on_file_system.join(", ")}"
+          end
+
+          expect(missing_entries_on_file_system.count + extra_entries_on_file_system.count).to be(0), failure_message
           verify_file_structure(entry_pathname, entry_entries) if entry_entries.count > 0
         end
       end
