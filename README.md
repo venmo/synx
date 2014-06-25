@@ -53,11 +53,10 @@ if they wanted to not sync the `/OCMock/Core Mocks` and `/OCMockTests` groups, a
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+We'd love to see your ideas for improving this library! The best way to contribute is by submitting a pull request. We'll do our best to respond to your patch as soon as possible. You can also submit a [new Github issue](https://github.com/venmo/synx/issues/new) if you find bugs or have questions. :octocat:
+
+Please make sure to follow our general coding style and add test coverage for new features!
+
 
 ## Contributors
 
