@@ -49,7 +49,7 @@ module Synx
 
       self.group_exclusions |= options[:group_exclusions] if options[:group_exclusions]
 
-      Synx::Tabber.quiet = options[:quiet]
+      Synx::Tabber.options = options
     end
     private :set_options
 
