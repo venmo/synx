@@ -56,9 +56,13 @@ describe Synx::Tabber do
 
     it "should not print anything if quiet is true" do
       Synx::Tabber.options = { quiet: true }
-      Synx::Tabber.increase(3)
       expect(Kernel).to_not receive(:puts)
       Synx::Tabber.puts("Hello, world.")
+    end
+
+    it "should print colors if no_color is false or not present" do
+      expect(Kernel).to receive(:puts).with("\e[0;31;49mHello, world.\e[0m")
+      Synx::Tabber.puts("Hello, world.".red)
     end
 
     it "should not print colors if no_color is true" do
