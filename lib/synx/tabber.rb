@@ -1,7 +1,7 @@
 module Synx
   class Tabber
 
-    @@quiet = false
+    @@options = {}
     @@tabbing = 0
 
     class << self
@@ -20,19 +20,20 @@ module Synx
 
       def reset
         @@tabbing = 0
-        self.quiet = false
+        self.options = {}
       end
 
-      def quiet=(quiet)
-        @@quiet = quiet
+      def options=(options = {})
+        @@options = options
       end
 
-      def quiet?
-        @@quiet
+      def options
+        @@options
       end
 
       def puts(str="")
-        Kernel.puts (a_single_tab * @@tabbing) + str.to_s unless quiet?
+        str = str.uncolorize if options[:no_color]
+        Kernel.puts (a_single_tab * @@tabbing) + str.to_s unless options[:quiet]
       end
 
       def a_single_tab

@@ -7,7 +7,7 @@ require "synx/abstract_target"
 require "synx/pbx_variant_group"
 require "synx/tabber"
 
-require "colored"
+require "colorize"
 
 module Synx
 end
