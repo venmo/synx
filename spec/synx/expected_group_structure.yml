@@ -4,6 +4,7 @@ dummy:
   Resources:
     image.png:
   AlreadySynced:
+    Localized.xib:
     Core Data.xcdatamodeld:
       Core Data.xcdatamodel:
         contents:
