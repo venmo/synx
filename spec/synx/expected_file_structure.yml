@@ -34,8 +34,8 @@ dummy:
     dummy-Prefix.pch:
     en.lproj:
       Localizable.strings:
-    ja.lproj:
-      Localizable.strings:
+  ja.lproj:
+    Localizable.strings:
   dummy.h:
   dummy.m:
   FileNotInXcodeProj.h:
@@ -49,8 +49,8 @@ dummyTests:
   Other Files:
     en.lproj:
       InfoPlist.strings:
-    ja.lproj:
-      InfoPlist.strings:
+  ja.lproj:
+    InfoPlist.strings:
   Supporting Files:
     dummyTests-prefix.pch:
     dummyTests-Info.plist:
