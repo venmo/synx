@@ -25,10 +25,10 @@ module Xcodeproj
         end
 
         def output
-          build_settings_ammended = "(build settings ammended: #{@setting_keys_changed.join(", ")})" if @setting_keys_changed.count > 0
+          build_settings_amended = "(build settings amended: #{@setting_keys_changed.join(", ")})" if @setting_keys_changed.count > 0
           removed_from_groups = "(had multiple parent groups, removed from groups: #{@removed_from_groups.join(", ")})" if @removed_from_groups.count > 0
-          str_output = "#{basename} #{build_settings_ammended} #{removed_from_groups}"
-          str_output = str_output.yellow if removed_from_groups || build_settings_ammended
+          str_output = "#{basename} #{build_settings_amended} #{removed_from_groups}"
+          str_output = str_output.yellow if removed_from_groups || build_settings_amended
           Synx::Tabber.puts str_output
         end
 
