@@ -4,7 +4,10 @@ describe Synx::Tabber do
 
   before(:each) do
     Synx::Tabber.reset
+    Synx::Tabber.options[:output] = output
   end
+
+  let(:output) { StringIO.new }
 
   describe "::increase" do
     it "should default to increasing tabbing by 1" do
@@ -48,27 +51,34 @@ describe Synx::Tabber do
   end
 
   describe "::puts" do
-    it "should call system's puts on the string, appending the appropraite indentation" do
+    it "should print to the output io with the appropriate indentation" do
       Synx::Tabber.increase(3)
-      expect(Kernel).to receive(:puts).with("      Hello, world.")
       Synx::Tabber.puts("Hello, world.")
+      expect(output.string).to eq("      Hello, world.\n")
     end
 
     it "should not print anything if quiet is true" do
-      Synx::Tabber.options = { quiet: true }
-      expect(Kernel).to_not receive(:puts)
+      Synx::Tabber.options[:quiet] = true
       Synx::Tabber.puts("Hello, world.")
+      expect(output.string).to eq("")
     end
 
     it "should print colors if no_color is false or not present" do
-      expect(Kernel).to receive(:puts).with("\e[0;31;49mHello, world.\e[0m")
       Synx::Tabber.puts("Hello, world.".red)
+      expect(output.string).to eq("\e[0;31;49mHello, world.\e[0m\n")
     end
 
     it "should not print colors if no_color is true" do
-      Synx::Tabber.options = { no_color: true }
-      expect(Kernel).to receive(:puts).with("Hello, world.")
+      Synx::Tabber.options[:no_color] = true
       Synx::Tabber.puts("Hello, world.".red)
+      expect(output.string).to eq("Hello, world.\n")
+    end
+
+    it "prints to stdout if no output is specified" do
+      expect($stdout).to receive(:puts).with("  Hello, world.")
+      Synx::Tabber.reset
+      Synx::Tabber.increase
+      Synx::Tabber.puts("Hello, world.")
     end
   end
 
