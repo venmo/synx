@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'clamp'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'synx')
+require 'synx'
 
 Clamp do
 
