@@ -1,5 +1,4 @@
-require File.join(File.dirname(__FILE__), '..', 'spec_helper')
-
+require 'spec_helper'
 require 'fileutils'
 require 'pathname'
 require 'yaml'
@@ -86,11 +85,11 @@ describe Synx::Project do
     end
 
     def expected_file_structure
-      YAML::load_file(File.join(File.dirname(__FILE__), "expected_file_structure.yml"))
+      YAML::load_file(File.expand_path("../expected_file_structure.yml", __FILE__))
     end
 
     def expected_group_structure
-      YAML::load_file(File.join(File.dirname(__FILE__), "expected_group_structure.yml"))
+      YAML::load_file(File.expand_path("../expected_group_structure.yml", __FILE__))
     end
 
     describe "with no additional options" do
