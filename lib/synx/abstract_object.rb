@@ -15,7 +15,17 @@ module Xcodeproj
 
         def work_pathname
           # hierarchy path has a leading '/' that will break path concatenation
-          @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
+          @work_pathname ||= begin
+            work_pathname_from_hierarchy = project.work_root_pathname + hierarchy_path[1..-1]
+            if parent.class == PBXVariantGroup
+              super_work_pathname_components = work_pathname_from_hierarchy.each_filename.to_a
+              localization_parent_name = parent.real_path.basename.to_s
+              index_of_localization_parent = super_work_pathname_components.index(localization_parent_name)
+              localization = super_work_pathname_components.pop + ".lproj"
+              work_pathname_from_hierarchy = "/" + super_work_pathname_components.insert(index_of_localization_parent + 1, localization).join(File::Separator)
+            end
+            Pathname(work_pathname_from_hierarchy)
+          end
         end
 
         def ensure_internal_consistency(group)

@@ -14,21 +14,24 @@ module Xcodeproj
             FileUtils.mv(file.real_path, work_pathname)
             Synx::Tabber.puts file.real_path.basename.to_s.green
           else
-            parent_folder_path = children.first.real_path.parent
-            work_destination_pathname = parent.work_pathname
-
-            if parent_folder_path.exist?
-              FileUtils.mv(parent_folder_path, work_destination_pathname.realpath)
+            children.each do |child|
+              child.work_pathname.mkpath
+              FileUtils.mv(child.real_path, child.work_pathname)
             end
-            Synx::Tabber.puts (parent_folder_path.basename.to_s + "/").green
-            Synx::Tabber.increase
-            Synx::Tabber.puts file.real_path.basename.to_s.green
-            Synx::Tabber.decrease
+
+            Synx::Tabber.puts "#{children.first.real_path.basename} (localized: #{localizations.join(", ")})"
           end
         end
 
         def lproj_as_group?
           parent.basename =~ /.+\.lproj$/
+        end
+
+        def localizations
+          children.map do |child|
+            matches = child.real_path.to_s.match /(\/[^\/]+?\.lproj)/
+            matches[1].gsub(".lproj", "").gsub("/", "")
+          end
         end
 
       end

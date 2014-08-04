@@ -6,6 +6,10 @@ dummy:
   data.json:
   image-not-in-xcodeproj.png:
   AlreadySynced:
+    ja.lproj:
+      Localized.xib:
+    en.lproj:
+      Localized.xib:
     Core Data.xcdatamodeld:
       .xccurrentversion:
       Core Data.xcdatamodel:
@@ -30,6 +34,8 @@ dummy:
     dummy-Prefix.pch:
     en.lproj:
       Localizable.strings:
+  ja.lproj:
+    Localizable.strings:
   dummy.h:
   dummy.m:
   FileNotInXcodeProj.h:
@@ -43,6 +49,8 @@ dummyTests:
   Other Files:
     en.lproj:
       InfoPlist.strings:
+  ja.lproj:
+    InfoPlist.strings:
   Supporting Files:
     dummyTests-prefix.pch:
     dummyTests-Info.plist:
