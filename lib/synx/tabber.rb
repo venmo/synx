@@ -33,13 +33,18 @@ module Synx
 
       def puts(str="")
         str = str.uncolorize if options[:no_color]
-        Kernel.puts (a_single_tab * @tabbing) + str.to_s unless options[:quiet]
+        output.puts (a_single_tab * @tabbing) + str.to_s unless options[:quiet]
       end
 
       def a_single_tab
         return "  "
       end
       private :a_single_tab
+
+      def output
+        options.fetch(:output, $stdout)
+      end
+      private :output
 
     end
   end
