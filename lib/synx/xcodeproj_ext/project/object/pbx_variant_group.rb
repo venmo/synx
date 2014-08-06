@@ -1,10 +1,8 @@
-require 'xcodeproj'
-
 module Xcodeproj
   class Project
     module Object
       class PBXVariantGroup
-        
+
         # Need to retain *.lproj files on the system
         def sync(group)
           ensure_internal_consistency(group)
