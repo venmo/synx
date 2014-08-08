@@ -1,10 +1,8 @@
-require 'xcodeproj'
-
 module Xcodeproj
   class Project
     module Object
       class PBXFileReference
-        
+
         def sync(group)
           if should_sync?
             if should_move?
@@ -48,7 +46,7 @@ module Xcodeproj
         def change_build_settings_reference
           @setting_keys_changed = []
           return unless basename =~ /\.(pch|plist)$/
-          
+
           project.targets.each do |t|
             t.each_build_settings do |bs|
               ["INFOPLIST_FILE", "GCC_PREFIX_HEADER"].each do |setting_key|

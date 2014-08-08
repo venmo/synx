@@ -1,10 +1,8 @@
-require 'xcodeproj'
-
 module Xcodeproj
   class Project
     module Object
       class PBXGroup
-        
+
         def sync(group)
           ensure_internal_consistency(group)
           if excluded_from_sync?
@@ -61,7 +59,7 @@ module Xcodeproj
 
         def handle_unused_entry(entry_pathname)
           entries_to_ignore = %W(.DS_Store)
-          unless entries_to_ignore.include?(entry_pathname.basename.to_s)            
+          unless entries_to_ignore.include?(entry_pathname.basename.to_s)
             if entry_pathname.directory?
               work_entry_pathname = project.pathname_to_work_pathname(entry_pathname)
               # The directory may have already been created for one of two reasons
