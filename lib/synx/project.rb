@@ -7,7 +7,7 @@ module Synx
     SYNXRONIZE_DIR = File.join(ENV["HOME"], '.synx')
     private_constant :SYNXRONIZE_DIR
 
-    DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products)
+    DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products /Pods)
     private_constant :DEFAULT_EXCLUSIONS
 
     attr_accessor :delayed_groups_set_path, :group_exclusions, :prune
@@ -95,7 +95,7 @@ module Synx
     def group_exclusions=(new_exclusions)
       new_exclusions.each do |exclusion|
         # Group paths always start with a '/', so put one there if it isn't already.
-        exclusion.prepend("/") unless exclusion[0] == "/"
+        exclusion = "/" + exclusion unless exclusion[0] == "/"
         # Don't check our own default exclusions -- they may not have it in their project.
         unless DEFAULT_EXCLUSIONS.include?(exclusion)
           # remove leading '/' for this check
