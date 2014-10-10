@@ -158,7 +158,7 @@ describe Synx::Project do
       end
 
       it "should add the group exclusions to the array" do
-        expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions.sort).to eq(%W(/Libraries /Products /Frameworks /dummy /dummy/SuchGroup/VeryChildGroup).sort)
+        expect(DUMMY_SYNX_TEST_PROJECT.group_exclusions.sort).to eq(%W(/Libraries /Products /Frameworks /Pods /dummy /dummy/SuchGroup/VeryChildGroup).sort)
       end
     end
 
