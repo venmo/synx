@@ -93,21 +93,20 @@ module Synx
     end
 
     def group_exclusions=(new_exclusions)
-      new_exclusions.each do |exclusion|
+      @group_exclusions = new_exclusions.map do |exclusion|
         # Group paths always start with a '/', so put one there if it isn't already.
         exclusion = "/" + exclusion unless exclusion[0] == "/"
         # Don't check our own default exclusions -- they may not have it in their project.
         unless DEFAULT_EXCLUSIONS.include?(exclusion)
           # remove leading '/' for this check
-          exclusion = exclusion.dup
-          exclusion[0] = ''
-          unless self[exclusion]
-            raise IndexError, "No group #{exclusion} exists"
+          exclusionCopy = exclusion.dup
+          exclusionCopy[0] = ''
+          unless self[exclusionCopy]
+            raise IndexError, "No group #{exclusionCopy} exists"
           end
         end
+        exclusion
       end
-
-      @group_exclusions = new_exclusions
     end
 
     def has_object_for_pathname?(pathname)
