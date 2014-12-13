@@ -12,8 +12,12 @@ module Xcodeproj
         end
 
         def work_pathname
-          # hierarchy path has a leading '/' that will break path concatenation
-          @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
+          @work_pathname ||= if hierarchy_path
+            # hierarchy path has a leading '/' that will break path concatenation
+            project.work_root_pathname + hierarchy_path[1..-1]
+          else
+            project.work_root_pathname
+          end
         end
 
         def ensure_internal_consistency(group)
