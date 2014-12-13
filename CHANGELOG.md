@@ -2,6 +2,11 @@
 
 ## master
 
+* Add a command to show the version of Synx
+  [Mark Larsen](https://github.com/marklarr)
+  [#61](https://github.com/venmo/slather/pull/61)
+
+
 ## v0.0.54
 
 * Use xcodeproj v0.20.0  
