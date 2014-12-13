@@ -11,6 +11,10 @@ Clamp do
   option "--no-default-exclusions", :flag, "doesn't use the default exclusions of /Libraries, /Frameworks, and /Products"
   option ["--quiet", "-q"], :flag, "silence all output"
   option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
+  option ["--version", "-v"], :flag, "shows synx version" do
+    puts "Synx #{Synx::VERSION}"
+    exit(0)
+  end
 
   def execute
     project = Synx::Project.open(xcodeproj_path)
