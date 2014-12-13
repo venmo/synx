@@ -17,8 +17,12 @@ Clamp do
   end
 
   def execute
-    project = Synx::Project.open(xcodeproj_path)
-    project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
+    if Process.uid == 0
+      puts "You cannot run Synx as root.".red
+    else
+      project = Synx::Project.open(xcodeproj_path)
+      project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
+    end
   end
 
 end

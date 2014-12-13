@@ -2,10 +2,13 @@
 
 ## master
 
+* Prohibit running Synx as root to avoid file permission issues 
+  [Mark Larsen](https://github.com/marklarr)
+  [#60](https://github.com/venmo/slather/pull/60)
+
 * Add a command to show the version of Synx
   [Mark Larsen](https://github.com/marklarr)
   [#61](https://github.com/venmo/slather/pull/61)
-
 
 ## v0.0.54
 
