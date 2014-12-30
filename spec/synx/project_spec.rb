@@ -131,7 +131,7 @@ describe Synx::Project do
         expected_file_structure_with_removals = expected_file_structure
         expected_file_structure_with_removals["dummy"].except!("image-not-in-xcodeproj.png")
         expected_file_structure_with_removals["dummy"].except!("FileNotInXcodeProj.h")
-        expected_file_structure_with_removals["dummy"]["AlreadySynced"]["FolderNotInXcodeProj"].except!("AnotherFileNotInXcodeProj.h")
+        expected_file_structure_with_removals["dummy"]["AlreadySynced"].except!("FolderNotInXcodeProj")
         verify_file_structure(Pathname(DUMMY_SYNX_TEST_PROJECT_PATH).parent, expected_file_structure_with_removals)
       end
 

@@ -4,7 +4,7 @@ module Xcodeproj
       class PBXGroup
 
         def sync(group)
-          ensure_internal_consistency(group)
+          ensure_internal_consistency(group) # Make sure we don't belong to any other groups
           if excluded_from_sync?
             Synx::Tabber.puts "#{basename}/ (excluded)".yellow
           else
@@ -12,9 +12,17 @@ module Xcodeproj
             Synx::Tabber.increase
 
             squash_duplicate_file_references
-            work_pathname.mkpath
-            files.each { |pbx_file| pbx_file.sync(self) }
-            all_groups.each { |group| group.sync(self) }
+            # Child directories may not exist yet (and may be different for
+            # each file) if this is a localized group, so we do the mkpath call
+            # inside the loops.
+            files.each do |pbx_file|
+              pbx_file.work_pathname.dirname.mkpath
+              pbx_file.sync(self)
+            end
+            all_groups.each do |group|
+              group.work_pathname.dirname.mkpath
+              group.sync(self)
+            end
             sync_path
 
             Synx::Tabber.decrease
@@ -31,7 +39,11 @@ module Xcodeproj
           else
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
-            Dir[real_path.to_s + "/{*,.*}"].reject { |e| %W(. ..).include?(Pathname(e).basename.to_s) }.each do |entry|
+            Dir[real_path.to_s + "/{*,.*}"]
+            .reject { |e| %W(. ..).include?(Pathname(e).basename.to_s) }
+            .each do |entry|
+              # Is this right? entry should be an absolute path here, so it should
+              # overwrite real_path entirely in this sum, which seems counterintuitive.
               entry_pathname = real_path + entry
               unless project.has_object_for_pathname?(entry_pathname)
                 handle_unused_entry(entry_pathname)
@@ -43,32 +55,24 @@ module Xcodeproj
         end
 
         def sync_path
-          self.path = basename
+          self.path = work_pathname.relative_path_from(parent.work_pathname).to_s
           self.source_tree = "<group>"
         end
         private :sync_path
 
         def all_groups
-          groups | version_groups | variant_groups
+          children.select { |child| child.is_a?(Xcodeproj::Project::Object::PBXGroup)}
         end
-
-        def variant_groups
-          children.select { |child| child.instance_of?(Xcodeproj::Project::Object::PBXVariantGroup) }
-        end
-        private :variant_groups
 
         def handle_unused_entry(entry_pathname)
           entries_to_ignore = %W(.DS_Store)
           unless entries_to_ignore.include?(entry_pathname.basename.to_s)
             if entry_pathname.directory?
-              work_entry_pathname = project.pathname_to_work_pathname(entry_pathname)
-              # The directory may have already been created for one of two reasons
-              # 1. It was created as a piece of another path, ie, /this/middle/directory.mkdir got called.
-              # 2. OS X has case insensitive folder names, so has_object_for_pathname? may have failed to notice it had the folder.
-              work_entry_pathname.mkdir unless work_entry_pathname.exist?
               # recurse
               Synx::Tabber.puts entry_pathname.basename.to_s.green
               Synx::Tabber.increase
+              # Don't create the directory manually: if it has children, it will
+              # be created then, and if it doesn't, we don't want it.
               entry_pathname.children.each { |child| handle_unused_entry(child) }
               Synx::Tabber.decrease
             elsif entry_pathname.file?
@@ -86,7 +90,9 @@ module Xcodeproj
             Synx::Tabber.puts "#{file_pathname.basename} (removed source/image file that is not referenced by the Xcode project)".red
             return
           elsif !project.prune || !is_file_to_prune
-            FileUtils.mv(file_pathname.realpath, project.pathname_to_work_pathname(file_pathname.parent).realpath)
+            destination = project.pathname_to_work_pathname(file_pathname.parent.realpath)
+            destination.mkpath
+            FileUtils.mv(file_pathname.realpath, destination)
             if is_file_to_prune
               Synx::Tabber.puts "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)".yellow
             else

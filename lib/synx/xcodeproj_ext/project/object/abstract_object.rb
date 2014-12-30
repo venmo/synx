@@ -8,27 +8,36 @@ module Xcodeproj
         end
 
         def referring_groups
-          referrers.select { |ref| ref.instance_of?(Xcodeproj::Project::Object::PBXGroup) }
+          referrers.select { |ref| ref.is_a?(Xcodeproj::Project::Object::PBXGroup) }
         end
 
         def work_pathname
-          # hierarchy path has a leading '/' that will break path concatenation
-          @work_pathname ||= project.work_root_pathname + hierarchy_path[1..-1]
+          # Intuitively, we want the work pathname to correspond 1-1 with the
+          # view in the project hierarchy. Xcode's collapsed display of
+          # identically-named localized files causes some complications, leading
+          # to the special cases here.
+          if self.equal?(project.main_group)
+            @work_pathname ||= project.work_root_pathname
+          elsif parent.is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
+            # Localized object, naming is handled differently.
+            @work_pathname ||= parent.work_pathname + "#{display_name}.lproj" + parent.display_name
+          elsif is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
+            # Localized container, has no path of its own.
+            @work_pathname ||= parent.work_pathname
+          else
+            @work_pathname ||= parent.work_pathname + display_name
+          end
         end
 
         def ensure_internal_consistency(group)
           @removed_from_groups = []
-          if referring_groups.count > 1
-            # Files should only have one referring group -- this is an internal consistency issue if there is more than 1.
-            # Just remove all referring groups but the one we're syncing with
-
-            referring_groups.each do |rg|
-              unless rg == group
-                rg.remove_reference(self) unless rg == group
-                @removed_from_groups << rg.hierarchy_path
-              end
+          # Objects should only have one referring group -- this is an internal consistency issue if there is more than 1.
+          # Just remove all referring groups but the one we're passed
+          referring_groups.each do |rg|
+            unless rg == group
+              rg.remove_reference(self)
+              @removed_from_groups << rg.hierarchy_path
             end
-
           end
         end
 
