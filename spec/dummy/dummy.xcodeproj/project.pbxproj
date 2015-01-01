@@ -62,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		637E22771A5235CE00A08D6A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8C2DEB7D191D3F5C003A1F44 /* ManyFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManyFiles.h; sourceTree = "<group>"; };
 		8C2DEB7E191D3F5C003A1F44 /* ManyFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManyFiles.m; sourceTree = "<group>"; };
 		8C2DEB80191D3F68003A1F44 /* Wow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wow.h; sourceTree = "<group>"; };
@@ -207,7 +208,7 @@
 		8C848C4E190DB9B300E9727B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8CD2ABF019558D4100341C58 /* en.lproj */,
+				8CD2ABF119558D7800341C58 /* Localizable.strings */,
 				8C848C4F190DB9B300E9727B /* dummy-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -227,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				8C848C63190DB9B300E9727B /* dummyTests-Info.plist */,
-				8C848C64190DB9B300E9727B /* InfoPlist.strings */,
 				8CE2DA1D19220F7B00D06F5E /* dummyTests-prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -247,14 +247,6 @@
 				8CADDD3A19354F120076033B /* image.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		8CD2ABF019558D4100341C58 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				8CD2ABF119558D7800341C58 /* Localizable.strings */,
-			);
-			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		8CDA046219374F15004435A1 /* FolderWithGroupNotLinked */ = {
@@ -318,6 +310,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 			);
 			mainGroup = 8C848C3F190DB9B300E9727B;
 			productRefGroup = 8C848C49190DB9B300E9727B /* Products */;
@@ -389,8 +382,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				8CD2ABF219558D7800341C58 /* en */,
+				637E22771A5235CE00A08D6A /* de */,
 			);
 			name = Localizable.strings;
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

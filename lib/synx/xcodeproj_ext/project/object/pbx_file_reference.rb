@@ -6,10 +6,10 @@ module Xcodeproj
         def sync(group)
           if should_sync?
             if should_move?
-              FileUtils.mv(real_path.to_s, group.work_pathname.to_s)
+              FileUtils.mv(real_path.to_s, work_pathname.to_s)
               # TODO: move out to abstract_object
               self.source_tree = "<group>"
-              self.path = real_path.basename.to_s
+              self.path = work_pathname.relative_path_from(parent.work_pathname).to_s
             else
               # Don't move this file around -- it's not even inside the structure. Just fix the relative reference
               self.path = real_path.relative_path_from((project.work_pathname_to_pathname(group.work_pathname))).to_s

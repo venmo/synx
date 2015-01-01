@@ -30,6 +30,8 @@ dummy:
     dummy-Prefix.pch:
     en.lproj:
       Localizable.strings:
+    de.lproj:
+      Localizable.strings:
   dummy.h:
   dummy.m:
   FileNotInXcodeProj.h:
