@@ -36,15 +36,10 @@ module Xcodeproj
         def move_entries_not_in_xcodeproj
           if excluded_from_sync?
             Synx::Tabber.puts "#{basename}/ (excluded)".yellow
-          else
+          elsif real_path.exist?
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
-            Dir[real_path.to_s + "/{*,.*}"]
-            .reject { |e| %W(. ..).include?(Pathname(e).basename.to_s) }
-            .each do |entry|
-              # Is this right? entry should be an absolute path here, so it should
-              # overwrite real_path entirely in this sum, which seems counterintuitive.
-              entry_pathname = real_path + entry
+            real_path.children.each do |entry_pathname|
               unless project.has_object_for_pathname?(entry_pathname)
                 handle_unused_entry(entry_pathname)
               end
