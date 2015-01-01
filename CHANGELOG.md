@@ -2,16 +2,16 @@
 
 ## v0.0.6 
 
-* Make synx work for localized files 
-  [archaeopterasa](https://github.com/archaeopterasa) 
+* Make synx work for localized files   
+  [archaeopterasa](https://github.com/archaeopterasa)
   [#63](https://github.com/venmo/slather/pull/63)
 
-* Prohibit running Synx as root to avoid file permission issues 
-  [Mark Larsen](https://github.com/marklarr) 
+* Prohibit running Synx as root to avoid file permission issues   
+  [Mark Larsen](https://github.com/marklarr)
   [#60](https://github.com/venmo/slather/pull/60)
 
-* Add a command to show the version of Synx
-  [Mark Larsen](https://github.com/marklarr)  
+* Add a command to show the version of Synx  
+  [Mark Larsen](https://github.com/marklarr) 
   [#61](https://github.com/venmo/slather/pull/61)
 
 ## v0.0.54
