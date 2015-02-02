@@ -6,6 +6,7 @@ require 'synx'
 Clamp do
 
   parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
+  option ["--warn-only", "-w"], :flag, "show warnings for files whose paths do not match the project structure, but do not make any changes"
   option ["--prune", "-p"], :flag, "remove source files and image resources that are not referenced by the the xcode project"
   option "--no-color", :flag, "removes all color from the output"
   option "--no-default-exclusions", :flag, "doesn't use the default exclusions of /Libraries, /Frameworks, and /Products"
@@ -21,7 +22,7 @@ Clamp do
       puts "You cannot run Synx as root.".red
     else
       project = Synx::Project.open(xcodeproj_path)
-      project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
+      project.sync(:warn_only_non_destructive => warn_only?, :prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
     end
   end
 

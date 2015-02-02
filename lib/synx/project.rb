@@ -17,7 +17,9 @@ module Synx
       presync_check
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
-      main_group.all_groups.each { |gr| gr.sync(main_group) }
+      warn_only = options[:warn_only_non_destructive]
+      main_group.all_groups.each { |gr| gr.sync(main_group, warn_only) }
+      return if warn_only==true
       Synx::Tabber.puts "\n\n"
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)

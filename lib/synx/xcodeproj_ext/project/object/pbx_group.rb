@@ -3,7 +3,7 @@ module Xcodeproj
     module Object
       class PBXGroup
 
-        def sync(group)
+        def sync(group, warn_only)
           ensure_internal_consistency(group) # Make sure we don't belong to any other groups
           if excluded_from_sync?
             Synx::Tabber.puts "#{basename}/ (excluded)".yellow
@@ -17,11 +17,11 @@ module Xcodeproj
             # inside the loops.
             files.each do |pbx_file|
               pbx_file.work_pathname.dirname.mkpath
-              pbx_file.sync(self)
+              pbx_file.sync(self, warn_only)
             end
             all_groups.each do |group|
               group.work_pathname.dirname.mkpath
-              group.sync(self)
+              group.sync(self, warn_only)
             end
             sync_path
 
