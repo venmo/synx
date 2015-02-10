@@ -92,6 +92,10 @@ describe Synx::Project do
       YAML::load_file(File.expand_path("../expected_group_structure.yml", __FILE__))
     end
 
+    def original_file_structure
+      YAML::load_file(File.expand_path("../original_file_structure.yml", __FILE__))
+    end
+
     describe "with no additional options" do
 
       before(:all) do
@@ -118,6 +122,16 @@ describe Synx::Project do
           expect(bs["GCC_PREFIX_HEADER"]).to eq("dummyTests/Supporting Files/dummyTests-Prefix.pch")
           expect(bs["INFOPLIST_FILE"]).to eq("dummyTests/Supporting Files/dummyTests-Info.plist")
         end
+      end
+    end
+
+    describe "with warnings only option enabled" do
+      before(:all) do
+        DUMMY_SYNX_TEST_PROJECT.sync(:prune => true, :output => StringIO.new)
+      end
+
+      it "should not make any changes to file structure" do
+        verify_file_structure(Pathname(DUMMY_SYNX_TEST_PROJECT_PATH).parent, original_file_structure)
       end
     end
 
