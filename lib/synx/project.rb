@@ -17,9 +17,13 @@ module Synx
       presync_check
       Synx::Tabber.increase
       Synx::Tabber.puts "Syncing files that are included in Xcode project...".bold.white
-      warn_only = options[:warn_only_non_destructive]
-      main_group.all_groups.each { |gr| gr.sync(main_group, warn_only) }
-      return if warn_only==true
+      warn_type = warn_type_from_options(options)
+      isError = false
+      main_group.all_groups.each do |gr|
+        isError = gr.sync(main_group, warn_type) || isError
+      end
+      exit -1 if isError
+      return if warn_type != nil
       Synx::Tabber.puts "\n\n"
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)
@@ -27,6 +31,16 @@ module Synx
       Synx::Tabber.decrease
       save
     end
+
+    def warn_type_from_options(options)
+      return nil if !options[:warn_type]
+      warn_type = options[:warn_type]
+      if warn_type != "warning" && warn_type != "error"
+        raise "Invalid warning type `#{warn_type}`"
+      end
+      return warn_type
+    end
+    private :warn_type_from_options
 
     def presync_check
       forward_slash_groups = main_group.groups_containing_forward_slash
