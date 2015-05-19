@@ -22,14 +22,13 @@ A command-line tool that reorganizes your Xcode project folder to match your Xco
 ## Usage
 
 ### Basic
-
-**WARNING: Make sure that your project is backed up through source control before doing anything**
+:warning: **WARNING: Make sure that your project is backed up through source control before doing anything** :warning:
 
 Execute the command on your project to have it reorganize the files on the file system:
 
      $ synx path/to/my/project.xcodeproj
      
-It may have confused cocoapods. Pod install, if you use them:
+It may have confused CocoaPods. If you use them, execute this command:
 
     $ pod install
     
@@ -40,18 +39,18 @@ You're good to go!
 Synx supports the following options:
 
 ```
-  --prune, -p                   remove source files and image resources that are not referenced by the the xcode project
+  --prune, -p                   remove source files and image resources that are not referenced by the the Xcode project
   --no-color                    removes all color from the output
   --no-default-exclusions       doesn't use the default exclusions of /Libraries, /Frameworks, and /Products
   --quiet, -q                   silence all output
   --exclusion, -e EXCLUSION     ignore an Xcode group while syncing
 ```
 
-OCMock, for example, could have done:
+For example, OCMock could have been organized using this command:
 
     $ synx -p -e "/OCMock/Core Mocks" -e /OCMockTests Source/OCMock.xcodeproj/
 
-if they wanted to not sync the `/OCMock/Core Mocks` and `/OCMockTests` groups, and also remove (`-p`) any image/source files found by synx that weren't ever referenced by any groups in Xcode.
+if they had wanted not to sync the `/OCMock/Core Mocks` and `/OCMockTests` groups, and also remove (`-p`) any image/source files found by synx that weren't referenced by any groups in Xcode.
 
 ## Contributing
 
