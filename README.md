@@ -17,7 +17,7 @@ A command-line tool that reorganizes your Xcode project folder to match your Xco
 
 ## Installation
 
-    $ gem install synx
+    $ sudo gem install synx
 
 ## Usage
 
