@@ -13,8 +13,8 @@ class Hash
   # arguments. This allows +except+ to play nice with hashes with indifferent access
   # for instance:
   #
-  #   {:a => 1}.with_indifferent_access.except(:a)  # => {}
-  #   {:a => 1}.with_indifferent_access.except("a") # => {}
+  #   {a: 1}.with_indifferent_access.except(:a)  # => {}
+  #   {a: 1}.with_indifferent_access.except("a") # => {}
   #
   def except(*keys)
     dup.except!(*keys)
@@ -95,7 +95,7 @@ describe Synx::Project do
     describe "with no additional options" do
 
       before(:all) do
-        DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new)
+        DUMMY_SYNX_TEST_PROJECT.sync(output: StringIO.new)
       end
 
       it "should have the correct physical file structure" do
@@ -124,7 +124,7 @@ describe Synx::Project do
     describe "with the prune option toggled" do
 
       before(:all) do
-        DUMMY_SYNX_TEST_PROJECT.sync(:prune => true, :output => StringIO.new)
+        DUMMY_SYNX_TEST_PROJECT.sync(prune: true, output: StringIO.new)
       end
 
       it "should remove unreferenced images and source files if the prune option is toggled" do
@@ -143,7 +143,7 @@ describe Synx::Project do
     describe "with the no_default_exclusions option toggled" do
 
       before(:all) do
-        DUMMY_SYNX_TEST_PROJECT.sync(:no_default_exclusions => true, :output => StringIO.new)
+        DUMMY_SYNX_TEST_PROJECT.sync(no_default_exclusions: true, output: StringIO.new)
       end
 
       it "should have an empty array for default exclusions" do
@@ -154,7 +154,7 @@ describe Synx::Project do
     describe "with group_exclusions provided as options" do
 
       before(:all) do
-        DUMMY_SYNX_TEST_PROJECT.sync(:group_exclusions => %W(/dummy /dummy/SuchGroup/VeryChildGroup), :output => StringIO.new)
+        DUMMY_SYNX_TEST_PROJECT.sync(group_exclusions: %W(/dummy /dummy/SuchGroup/VeryChildGroup), output: StringIO.new)
       end
 
       it "should add the group exclusions to the array" do
