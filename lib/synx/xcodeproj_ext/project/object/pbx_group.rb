@@ -24,6 +24,7 @@ module Xcodeproj
               group.sync(self)
             end
             sync_path
+            sort_by_name
 
             Synx::Tabber.decrease
           end
@@ -31,6 +32,20 @@ module Xcodeproj
 
         def excluded_from_sync?
           project.group_exclusions.include?(hierarchy_path)
+        end
+
+        def sort_by_name
+          children.sort! do |x, y|
+            if x.isa == 'PBXGroup' && !(y.isa == 'PBXGroup')
+              -1
+            elsif !(x.isa == 'PBXGroup') && y.isa == 'PBXGroup'
+              1
+            elsif x.display_name && y.display_name
+              x.display_name <=> y.display_name
+            else
+              0
+            end
+          end
         end
 
         def move_entries_not_in_xcodeproj
