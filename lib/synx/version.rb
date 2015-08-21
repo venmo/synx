@@ -1,3 +1,3 @@
 module Synx
-  VERSION = "0.0.61"
+  VERSION = "0.1.0"
 end
