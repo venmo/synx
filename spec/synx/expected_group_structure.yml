@@ -1,8 +1,6 @@
+Frameworks:
+Products:
 dummy:
-  FolderWithGroupNotLinked:
-      data.json:
-  Resources:
-    image.png:
   AlreadySynced:
     Core Data.xcdatamodeld:
       Core Data.xcdatamodel:
@@ -17,25 +15,28 @@ dummy:
     NSObject+abc.m:
     Woot.h:
     Woot.m:
+  FolderWithGroupNotLinked:
+      data.json:
   GroupThatDoubleReferencesFile:
     ManyFiles.h:
     ManyFiles.m:
-  Supporting Files:
-    dummy-Prefix.pch:
-    en.lproj:
-      Localizable.strings:
-  dummy.h:
-  dummy.m:
+  Resources:
+    image.png:
   SuchGroup:
-    Wow.h:
-    Wow.m:
     VeryChildGroup:
       Wowwww.h:
       Wowwww.m:
+    Wow.h:
+    Wow.m:
+  Supporting Files:
+    Localizable.strings:
+    dummy-Prefix.pch:
+  dummy.h:
+  dummy.m:
 dummyTests:
   Other Files:
     InfoPlist.strings:
   Supporting Files:
-    dummyTests-Prefix.pch:
     dummyTests-Info.plist:
+    dummyTests-prefix.pch:
   dummyTests.m:

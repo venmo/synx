@@ -21,6 +21,7 @@ module Synx
       Synx::Tabber.puts "\n\n"
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)
+      main_group.sort_by_name
       transplant_work_project
       Synx::Tabber.decrease
       save
@@ -67,7 +68,7 @@ module Synx
     end
 
     def work_root_pathname
-      if @work_root_pathname 
+      if @work_root_pathname
         @work_root_pathname
       else
         @work_root_pathname = Pathname(File.join(SYNXRONIZE_DIR, root_pathname.basename.to_s))
@@ -111,17 +112,14 @@ module Synx
 
     def has_object_for_pathname?(pathname)
       @unmodified_project ||= Synx::Project.open(path)
-      @unmodified_project.objects.any? do |o| 
+      @unmodified_project.objects.any? do |o|
         begin
-          o.real_path.cleanpath == pathname.cleanpath 
-        rescue 
-          false 
+          o.real_path.cleanpath == pathname.cleanpath
+        rescue
+          false
         end
       end
     end
-
   end
 end
-
-
 

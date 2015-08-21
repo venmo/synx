@@ -32,10 +32,12 @@ describe Synx::Project do
   describe "#sync" do
 
     def verify_group_structure(group, expected_structure)
-      expected_structure.each do |object_name, object_children|
+      expected_structure.each_with_index do |(object_name, object_children), index|
         failure_message = "expected group `#{group.basename}` to have child `#{object_name}`"
-        object = group.children.detect { |child| child.basename == object_name }
+        object = group.children[index]
+        expect(object.basename).to eq(object_name)
         expect(group).to_not be_nil, failure_message
+        next if ["Products", "Frameworks"].include?(object.display_name)
 
         if object.instance_of?(Xcodeproj::Project::Object::PBXGroup)
           object_children ||= {}
