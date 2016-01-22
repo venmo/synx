@@ -93,7 +93,7 @@ module Xcodeproj
         private :handle_unused_entry
 
         def handle_unused_file(file_pathname)
-          prune_file_extensions = %W(.h .m .xib .mm .c .png .jpg .jpeg)
+          prune_file_extensions = %W(.h .m .swift .mm .c .xib .png .jpg .jpeg)
           is_file_to_prune = prune_file_extensions.include?(file_pathname.extname.downcase)
 
           if is_file_to_prune && project.prune
