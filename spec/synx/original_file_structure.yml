@@ -1,0 +1,44 @@
+dummy:
+  AlreadySynced:
+    Core Data.xcdatamodeld:
+      .xccurrentversion:
+      Core Data.xcdatamodel:
+        contents:
+      Core Data 2.xcdatamodel:
+        contents:
+      Core Data 3.xcdatamodel:
+        contents:
+      Core Data 4.xcdatamodel:
+        contents:
+    FolderNotInXcodeProj:
+      AnotherFileNotInXcodeProj.h:
+      NSObject+abc.h:
+      NSObject+abc.m:
+      Wowwww.h:
+      Wowwww.m:
+    Woot.h:
+    Woot.m:
+    stuff.xml:
+  FileNotInXcodeProj.h
+  ManyFiles.h
+  ManyFiles.m
+  Wow.h
+  Wow.m
+  data.json
+  dummy-Prefix.pch
+  dummy.h
+  dummy.m
+  en.lproj:
+    Localizable.strings:
+    de.lproj:
+      Localizable.strings:
+  folderWithGroupNotLinked:
+    data.json
+  image-not-in-xcodeproj.png:
+  image.png:
+dummyTests:
+  dummyTests-Info.plist:
+  dummyTests-prefix.pch:
+  dummyTests.m:
+  en.lproj:
+    InfoPlist.strings:

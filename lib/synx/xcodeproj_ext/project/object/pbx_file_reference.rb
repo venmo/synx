@@ -3,23 +3,32 @@ module Xcodeproj
     module Object
       class PBXFileReference
 
-        def sync(group)
+        def sync(group, warn_type)
+          isError = false
           if should_sync?
             if should_move?
-              FileUtils.mv(real_path.to_s, work_pathname.to_s)
-              # TODO: move out to abstract_object
-              self.source_tree = "<group>"
-              self.path = work_pathname.relative_path_from(parent.work_pathname).to_s
+              if !warn_type
+                FileUtils.mv(real_path.to_s, work_pathname.to_s)
+                # TODO: move out to abstract_object
+                self.source_tree = "<group>"
+                self.path = work_pathname.relative_path_from(parent.work_pathname).to_s
+              else
+                cmd = "echo '#{real_path.to_s}:1: #{warn_type}: Path on disk does not match project group structure.'"
+                warnings = `#{cmd}`
+                puts warnings
+                isError = (warnings.length > 0 && warn_type == "error")
+              end
             else
               # Don't move this file around -- it's not even inside the structure. Just fix the relative reference
               self.path = real_path.relative_path_from((project.work_pathname_to_pathname(group.work_pathname))).to_s
             end
             change_build_settings_reference
 
-            output
+            output if warn_type == nil
           else
             Synx::Tabber.puts "skipped #{basename}".red
           end
+          return isError
         end
 
         def output
