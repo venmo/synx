@@ -10,7 +10,7 @@ module Synx
     DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products /Pods)
     private_constant :DEFAULT_EXCLUSIONS
 
-    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune
+    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name
 
     def sync(options={})
       set_options(options)
@@ -21,7 +21,7 @@ module Synx
       Synx::Tabber.puts "\n\n"
       Synx::Tabber.puts "Syncing files that are not included in Xcode project..".bold.white
       main_group.all_groups.each(&:move_entries_not_in_xcodeproj)
-      main_group.sort_by_name
+      main_group.sort_by_name if self.sort_by_name
       transplant_work_project
       Synx::Tabber.decrease
       save
@@ -49,6 +49,7 @@ module Synx
       end
 
       self.group_exclusions |= options[:group_exclusions] if options[:group_exclusions]
+      self.sort_by_name = !options[:no_sort_by_name]
 
       Synx::Tabber.options = options
     end

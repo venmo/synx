@@ -24,7 +24,7 @@ module Xcodeproj
               group.sync(self)
             end
             sync_path
-            sort_by_name
+            sort_by_name if project.sort_by_name
 
             Synx::Tabber.decrease
           end

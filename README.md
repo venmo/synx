@@ -42,6 +42,7 @@ Synx supports the following options:
   --prune, -p                   remove source files and image resources that are not referenced by the the Xcode project
   --no-color                    removes all color from the output
   --no-default-exclusions       doesn't use the default exclusions of /Libraries, /Frameworks, and /Products
+  --no-sort-by-name             disable sorting groups by name
   --quiet, -q                   silence all output
   --exclusion, -e EXCLUSION     ignore an Xcode group while syncing
 ```
