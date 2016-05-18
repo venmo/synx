@@ -20,7 +20,7 @@ module Xcodeproj
             @work_pathname ||= project.work_root_pathname
           elsif parent.is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
             # Localized object, naming is handled differently.
-            @work_pathname ||= parent.work_pathname + "#{display_name}.lproj" + parent.display_name
+            @work_pathname ||= parent.work_pathname + path
           elsif is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
             # Localized container, has no path of its own.
             @work_pathname ||= parent.work_pathname
