@@ -29,7 +29,12 @@ dummy:
     Wow.h:
     Wow.m:
   Supporting Files:
-    Localizable.strings:
+    Storyboard.storyboard:
+        Storyboard.storyboard:
+        Storyboard.strings:
+    View.xib:
+        View.xib:
+        View.strings:
     dummy-Prefix.pch:
   dummy.h:
   dummy.m:

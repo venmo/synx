@@ -6,7 +6,7 @@ script: bundle exec rspec
 
 env:
   - RVM_RUBY_VERSION=system
-  - RVM_RUBY_VERSION=2.1.1
+  - RVM_RUBY_VERSION=2.2.5
 
 before_install:
   - curl http://curl.haxx.se/ca/cacert.pem -o /usr/local/share/cacert.pem
