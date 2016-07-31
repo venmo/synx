@@ -28,10 +28,12 @@ dummy:
     ManyFiles.m:
   Supporting Files:
     dummy-Prefix.pch:
-    en.lproj:
-      Localizable.strings:
+    Base.lproj:
+      Storyboard.storyboard:
+      View.xib:
     de.lproj:
-      Localizable.strings:
+      Storyboard.strings:
+      View.strings:
   dummy.h:
   dummy.m:
   FileNotInXcodeProj.h:
