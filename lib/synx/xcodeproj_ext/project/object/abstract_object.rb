@@ -20,7 +20,13 @@ module Xcodeproj
             @work_pathname ||= project.work_root_pathname
           elsif parent.is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
             # Localized object, naming is handled differently.
-            @work_pathname ||= parent.work_pathname + "#{display_name}.lproj" + parent.display_name
+            # We need to grab the file extension from the path in order to prevent
+            # .xib and .strings files from being renamed to the .storyboard extension
+            # of their parent.
+            file_name = parent.display_name.slice(0..parent.display_name.rindex(".")-1)
+            file_ext = path.slice(path.rindex(".")..-1)
+            full_name = file_name + file_ext
+            @work_pathname ||= parent.work_pathname + "#{display_name}.lproj" + full_name
           elsif is_a?(Xcodeproj::Project::Object::PBXVariantGroup)
             # Localized container, has no path of its own.
             @work_pathname ||= parent.work_pathname
