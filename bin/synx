@@ -12,7 +12,7 @@ Clamp do
   option "--no-sort-by-name", :flag, "disable sorting groups by name"
   option ["--quiet", "-q"], :flag, "silence all output"
   option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
-  option ["--warn-type", "-w"], "warning|error", "show warnings or errors for files whose paths do not match the project structure. Using this option will not make any changes to the project. Use it as an Xcode build phase to alert the developer.", :attribute_name => :warn_type
+  option ["--warn-type", "-w"], "warning|error", "show warnings or errors only without modifying the project structure", :attribute_name => :warn_type
   option ["--version", "-v"], :flag, "shows synx version" do
     puts "Synx #{Synx::VERSION}"
     exit(0)
