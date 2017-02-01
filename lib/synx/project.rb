@@ -9,7 +9,7 @@ module Synx
     DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products /Pods)
     private_constant :DEFAULT_EXCLUSIONS
 
-    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name, :warn_type, :file_manager
+    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name, :warn_type, :file_utils
 
     def sync(options={})
       set_options(options)
@@ -69,8 +69,8 @@ module Synx
     def transplant_work_project
       # Move the synced entries over
       Dir.glob(work_root_pathname + "*").each do |path|
-        file_manager.rm_rf(work_pathname_to_pathname(Pathname(path)))
-        file_manager.mv(path, root_pathname.to_s)
+        file_utils.rm_rf(work_pathname_to_pathname(Pathname(path)))
+        file_utils.mv(path, root_pathname.to_s)
       end
     end
     private :transplant_work_project
@@ -85,7 +85,7 @@ module Synx
       else
         @work_root_pathname = Pathname(File.join(SYNXRONIZE_DIR, root_pathname.basename.to_s))
         # Clean up any previous synx and start fresh
-        file_manager.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
+        file_utils.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
         @work_root_pathname.mkpath
         @work_root_pathname
       end
@@ -133,8 +133,8 @@ module Synx
       end
     end
 
-    def file_manager
-      @file_manager ||= (warn_type ? Synx::BlankFileUtils : FileUtils)
+    def file_utils
+      @file_utils ||= (warn_type.nil? ? FileUtils : Synx::BlankFileUtils)
     end
 
     def sync_issues_repository
@@ -143,6 +143,10 @@ module Synx
 
     def print_dry_run_issues
       sync_issues_repository.print(warn_type.to_s) if warn_type
+    end
+
+    def scanned_files
+      @scanned_files ||= []
     end
 
     def exit_code

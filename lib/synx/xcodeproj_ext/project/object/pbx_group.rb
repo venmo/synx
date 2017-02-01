@@ -71,7 +71,7 @@ module Xcodeproj
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
             real_path.children.each do |entry_pathname|
-              unless project.has_object_for_pathname?(entry_pathname)
+              unless project.scanned_files.include?(entry_pathname.to_s) or project.has_object_for_pathname?(entry_pathname)
                 handle_unused_entry(entry_pathname)
               end
             end
@@ -120,7 +120,7 @@ module Xcodeproj
           elsif !project.prune || !is_file_to_prune
             destination = project.pathname_to_work_pathname(file_pathname.parent.realpath)
             destination.mkpath
-            file_manager.mv(file_pathname.realpath, destination)
+            file_utils.mv(file_pathname.realpath, destination)
             if is_file_to_prune
               Synx::Tabber.puts "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)".yellow
             else

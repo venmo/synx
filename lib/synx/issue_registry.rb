@@ -35,4 +35,16 @@ module Synx
     end
 
   end
+
+  class VisitedPathsRegistry
+
+    class << self
+
+      def paths
+        @paths ||= []
+      end
+
+    end
+
+  end
 end
