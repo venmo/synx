@@ -102,10 +102,6 @@ describe Synx::Project do
       YAML::load_file(File.expand_path("../original_file_structure.yml", __FILE__))
     end
 
-    def original_group_structure
-      YAML::load_file(File.expand_path("../original_group_structure.yml", __FILE__))
-    end
-
     describe "with no additional options" do
 
       before(:all) do
@@ -195,13 +191,13 @@ describe Synx::Project do
       it "should register group synchronize issues" do
         group_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'FolderWithGroupNotLinked'
 
-        expect(group_issues).to match_array(['Group: FolderWithGroupNotLinked is not synchronized with file system (should be dummy/FolderWithGroupNotLinked).'])
+        expect(group_issues).to match_array(['Group FolderWithGroupNotLinked is not synchronized with file system (current path: dummy, desired path: dummy/FolderWithGroupNotLinked).'])
       end
 
       it "should register file synchronize issues" do
         file_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'Wowwww.m'
 
-        expect(file_issues).to match_array(['File Reference: Wowwww.m is not synchronized with file system (should be dummy/SuchGroup/VeryChildGroup/Wowwww.m).'])
+        expect(file_issues).to match_array(['File reference Wowwww.m is not synchronized with file system (current path: dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m, desired path: dummy/SuchGroup/VeryChildGroup/Wowwww.m).'])
       end
 
       it "should register unused files issues" do
@@ -213,7 +209,7 @@ describe Synx::Project do
       it "should register sorting issues" do
         group_sort_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'AlreadySynced'
 
-        expect(group_sort_issues).to match_array(['Group: AlreadySynced is not sorted.'])
+        expect(group_sort_issues).to match_array(['Group /dummy/AlreadySynced is not sorted alphabetically.'])
       end
 
     end

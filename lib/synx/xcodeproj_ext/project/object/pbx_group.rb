@@ -51,7 +51,16 @@ module Xcodeproj
           end
 
           if before_sorting != children.to_a
-            project.sync_issues_repository.add_issue "Group: #{basename} is not sorted.", real_path, :not_sorted
+            issue = "Group #{pretty_hierarchy_path} is not sorted alphabetically."
+            project.sync_issues_repository.add_issue(issue, real_path, :not_sorted)
+          end
+        end
+
+        def pretty_hierarchy_path
+          if hierarchy_path.to_s.empty?
+            '/'
+          else
+            hierarchy_path.to_s
           end
         end
 
