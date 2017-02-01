@@ -9,7 +9,7 @@ module Synx
     DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products /Pods)
     private_constant :DEFAULT_EXCLUSIONS
 
-    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name, :warn_type
+    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name, :warn_type, :file_manager
 
     def sync(options={})
       set_options(options)
@@ -53,7 +53,7 @@ module Synx
       self.warn_type = validated_warn_type(options)
 
       Synx::Tabber.options = options
-      Synx::FileManager.options = options
+      file_manager.options = options
       sync_issues_repository.output = options[:output] unless options[:output].nil?
     end
     private :set_options
@@ -70,8 +70,8 @@ module Synx
     def transplant_work_project
       # Move the synced entries over
       Dir.glob(work_root_pathname + "*").each do |path|
-        Synx::FileManager.rm_rf(work_pathname_to_pathname(Pathname(path)))
-        Synx::FileManager.mv(path, root_pathname.to_s)
+        file_manager.rm_rf(work_pathname_to_pathname(Pathname(path)))
+        file_manager.mv(path, root_pathname.to_s)
       end
     end
     private :transplant_work_project
@@ -86,7 +86,7 @@ module Synx
       else
         @work_root_pathname = Pathname(File.join(SYNXRONIZE_DIR, root_pathname.basename.to_s))
         # Clean up any previous synx and start fresh
-        Synx::FileManager.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
+        file_manager.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
         @work_root_pathname.mkpath
         @work_root_pathname
       end
@@ -132,6 +132,10 @@ module Synx
           false
         end
       end
+    end
+
+    def file_manager
+      @file_manager ||= Synx::FileManager.new
     end
 
     def sync_issues_repository

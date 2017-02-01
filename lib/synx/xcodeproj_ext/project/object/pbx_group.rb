@@ -120,7 +120,7 @@ module Xcodeproj
           elsif !project.prune || !is_file_to_prune
             destination = project.pathname_to_work_pathname(file_pathname.parent.realpath)
             destination.mkpath
-            Synx::FileManager.mv(file_pathname.realpath, destination)
+            file_manager.mv(file_pathname.realpath, destination)
             if is_file_to_prune
               Synx::Tabber.puts "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)".yellow
             else

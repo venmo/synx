@@ -59,6 +59,10 @@ module Xcodeproj
           raise NotImplementedError
         end
 
+        def file_manager
+          project.file_manager
+        end
+
       end
     end
   end

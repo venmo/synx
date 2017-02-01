@@ -7,7 +7,7 @@ module Xcodeproj
           if should_sync?
             if should_move?
               track_sync_issues
-              Synx::FileManager.mv(real_path.to_s, work_pathname.to_s)
+              file_manager.mv(real_path.to_s, work_pathname.to_s)
               # TODO: move out to abstract_object
               self.source_tree = "<group>"
               self.path = work_pathname.relative_path_from(parent.work_pathname).to_s

@@ -29,10 +29,6 @@ end
 
 describe Synx::Project do
 
-  before(:all) {
-    Synx::FileManager.reset
-  }
-
   describe "#sync" do
 
     def verify_group_structure(group, expected_structure)
@@ -257,7 +253,7 @@ describe Synx::Project do
 
     it "should start fresh by removing any existing directory at work_root_pathname" do
       Pathname.any_instance.stub(:exist?).and_return(true)
-      expect(Synx::FileManager).to receive(:rm_rf)
+      expect(DUMMY_SYNX_TEST_PROJECT.file_manager).to receive(:rm_rf)
 
       DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)
     end
@@ -269,7 +265,7 @@ describe Synx::Project do
 
     it "should be an idempotent operation but return the same value through memoization" do
       pathname = DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)
-      expect(Synx::FileManager).to_not receive(:rm_rf)
+      expect(DUMMY_SYNX_TEST_PROJECT.file_manager).to_not receive(:rm_rf)
       expect_any_instance_of(Pathname).to_not receive(:exist?)
       expect_any_instance_of(Pathname).to_not receive(:mkpath)
       expect(DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)).to be(pathname)
