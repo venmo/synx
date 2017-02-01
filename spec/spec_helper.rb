@@ -3,8 +3,7 @@ require 'synx'
 require 'pry'
 
 DUMMY_SYNX_PATH = File.expand_path('../dummy', __FILE__)
-DUMMY_SYNX_PROJECT_PATH = File.join(DUMMY_SYNX_PATH, 'dummy.xcodeproj')
-DUMMY_SYNX_PBXPROJ_PATH = File.join(DUMMY_SYNX_PROJECT_PATH, 'project.pbxproj')
+DUMMY_SYNX_PBXPROJ_PATH = File.join(DUMMY_SYNX_PATH, 'dummy.xcodeproj/project.pbxproj')
 DUMMY_SYNX_TEST_PATH = File.expand_path('../test_dummy', __FILE__)
 DUMMY_SYNX_TEST_PROJECT_PATH = File.join(DUMMY_SYNX_TEST_PATH, 'dummy.xcodeproj')
 FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
