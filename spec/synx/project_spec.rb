@@ -312,4 +312,40 @@ describe Synx::Project do
       expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(-1)
     end
   end
+
+  describe "#file_manager" do
+    before(:each) {
+      FileUtils.stub(:mv)
+      FileUtils.stub(:rm_rf)
+      DUMMY_SYNX_TEST_PROJECT.file_manager = nil
+    }
+
+    it "should remove file if warning is not set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => nil)
+      DUMMY_SYNX_TEST_PROJECT.file_manager.rm_rf('/the_path')
+
+      expect(FileUtils).to have_received(:rm_rf).with('/the_path')
+    end
+
+    it "should move file if warning is not set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => nil)
+      DUMMY_SYNX_TEST_PROJECT.file_manager.mv('/the_path', '/the_other_path')
+
+      expect(FileUtils).to have_received(:mv).with('/the_path', '/the_other_path')
+    end
+
+    it "should not remove file if warning is set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
+      DUMMY_SYNX_TEST_PROJECT.file_manager.rm_rf('/the_path')
+
+      expect(FileUtils).to_not have_received(:rm_rf)
+    end
+
+    it "should not move file if warning is set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
+      DUMMY_SYNX_TEST_PROJECT.file_manager.mv('/the_path', '/the_other_path')
+
+      expect(FileUtils).to_not have_received(:mv)
+    end
+  end
 end

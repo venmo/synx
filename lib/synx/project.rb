@@ -53,7 +53,6 @@ module Synx
       self.warn_type = validated_warn_type(options)
 
       Synx::Tabber.options = options
-      file_manager.options = options
       sync_issues_repository.output = options[:output] unless options[:output].nil?
     end
     private :set_options
@@ -135,7 +134,7 @@ module Synx
     end
 
     def file_manager
-      @file_manager ||= Synx::FileManager.new
+      @file_manager ||= (warn_type ? Synx::BlankFileUtils : FileUtils)
     end
 
     def sync_issues_repository
