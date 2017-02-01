@@ -41,6 +41,20 @@ module Xcodeproj
           end
         end
 
+        def track_sync_issues
+          current_relative_path = real_path.relative_path_from(project.root_pathname).to_s
+          synced_relative_path = work_pathname.relative_path_from(project.work_root_pathname).to_s
+
+          if current_relative_path != synced_relative_path
+            issue = "#{readable_type}: #{basename} is not synchronized with file system (should be #{synced_relative_path})."
+            project.sync_issues_repository.add_issue(issue, basename, :not_synchronized)
+          end
+        end
+
+        def readable_type
+          isa.sub('PBX', '').split(/(?=[A-Z])/).join(' ')
+        end
+
         def sync(group)
           raise NotImplementedError
         end

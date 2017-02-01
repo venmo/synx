@@ -63,6 +63,12 @@ describe Synx::Tabber do
       expect(output.string).to eq("")
     end
 
+    it "should not print anything if warn is set" do
+      Synx::Tabber.options[:warn] = true
+      Synx::Tabber.puts("Hello, world.")
+      expect(output.string).to eq("")
+    end
+
     it "should print colors if no_color is false or not present" do
       Synx::Tabber.puts("Hello, world.".red)
       expect(output.string).to eq("\e[0;31;49mHello, world.\e[0m\n")

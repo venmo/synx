@@ -33,7 +33,11 @@ module Synx
 
       def puts(str="")
         str = str.uncolorize if options[:no_color]
-        output.puts (a_single_tab * @tabbing) + str.to_s unless options[:quiet]
+        output.puts (a_single_tab * @tabbing) + str.to_s unless quiet
+      end
+
+      def quiet
+        options[:quiet] or options[:warn]
       end
 
       def a_single_tab
