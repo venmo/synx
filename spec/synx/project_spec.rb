@@ -94,6 +94,10 @@ describe Synx::Project do
       YAML::load_file(File.expand_path("../expected_group_structure.yml", __FILE__))
     end
 
+    def original_file_structure
+      YAML::load_file(File.expand_path("../original_file_structure.yml", __FILE__))
+    end
+
     describe "with no additional options" do
 
       before(:all) do
@@ -164,6 +168,46 @@ describe Synx::Project do
       end
     end
 
+    describe "with warn option enabled" do
+
+      before(:all) do
+        DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync(:warn => 'warning', :output => StringIO.new, :prune => true)
+      end
+
+      it "should not modify the .pbxproj file" do
+        expect(FileUtils.identical?(DUMMY_SYNX_PBXPROJ_PATH, DUMMY_SYNX_DRY_RUN_TEST_PBXPROJ_PATH)).to be(true)
+      end
+
+      it "should not modify files structure" do
+        verify_file_structure(Pathname(DUMMY_SYNX_DRY_RUN_TEST_PROJECT_PATH).parent, original_file_structure)
+      end
+
+      it "should register group synchronize issues" do
+        group_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'FolderWithGroupNotLinked'
+
+        expect(group_issues).to match_array(['Group FolderWithGroupNotLinked is not synchronized with file system (current path: dummy, desired path: dummy/FolderWithGroupNotLinked).'])
+      end
+
+      it "should register file synchronize issues" do
+        file_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'Wowwww.m'
+
+        expect(file_issues).to match_array(['File reference Wowwww.m is not synchronized with file system (current path: dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m, desired path: dummy/SuchGroup/VeryChildGroup/Wowwww.m).'])
+      end
+
+      it "should register unused files issues" do
+        unused_file_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'image-not-in-xcodeproj.png'
+
+        expect(unused_file_issues).to match_array(['Unused file not referenced by Xcode project: image-not-in-xcodeproj.png.'])
+      end
+
+      it "should register sorting issues" do
+        group_sort_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'AlreadySynced'
+
+        expect(group_sort_issues).to match_array(['Group /dummy/AlreadySynced is not sorted alphabetically.'])
+      end
+
+    end
+
   end
 
   describe "group_exclusions=" do
@@ -207,7 +251,7 @@ describe Synx::Project do
 
     it "should start fresh by removing any existing directory at work_root_pathname" do
       Pathname.any_instance.stub(:exist?).and_return(true)
-      expect(FileUtils).to receive(:rm_rf)
+      expect(DUMMY_SYNX_TEST_PROJECT.file_utils).to receive(:rm_rf)
 
       DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)
     end
@@ -219,7 +263,7 @@ describe Synx::Project do
 
     it "should be an idempotent operation but return the same value through memoization" do
       pathname = DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)
-      expect(FileUtils).to_not receive(:rm_rf)
+      expect(DUMMY_SYNX_TEST_PROJECT.file_utils).to_not receive(:rm_rf)
       expect_any_instance_of(Pathname).to_not receive(:exist?)
       expect_any_instance_of(Pathname).to_not receive(:mkpath)
       expect(DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname)).to be(pathname)
@@ -235,6 +279,73 @@ describe Synx::Project do
       expected = DUMMY_SYNX_TEST_PROJECT.send(:work_root_pathname) + "some" + "path" + "to" + "thing"
 
       expect(value).to eq(expected)
+    end
+  end
+
+  describe "#exit_code" do
+    it "should return 0 if warn is not presented in options" do
+      DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(1)
+
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new)
+
+      expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(0)
+    end
+
+    it "should return 0 if no issues were found" do
+      DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(0)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'warning')
+
+      expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(0)
+    end
+
+    it "should return 0 if warn is set to warning" do
+      DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(1)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'warning')
+
+      expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(0)
+    end
+
+    it "should return -1 if warn is set to error and issues were found" do
+      DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(1)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
+
+      expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(-1)
+    end
+  end
+
+  describe "#file_utils" do
+    before(:each) {
+      FileUtils.stub(:mv)
+      FileUtils.stub(:rm_rf)
+      DUMMY_SYNX_TEST_PROJECT.file_utils = nil
+    }
+
+    it "should remove file if warning is not set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => nil)
+      DUMMY_SYNX_TEST_PROJECT.file_utils.rm_rf('/the_path')
+
+      expect(FileUtils).to have_received(:rm_rf).with('/the_path')
+    end
+
+    it "should move file if warning is not set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => nil)
+      DUMMY_SYNX_TEST_PROJECT.file_utils.mv('/the_path', '/the_other_path')
+
+      expect(FileUtils).to have_received(:mv).with('/the_path', '/the_other_path')
+    end
+
+    it "should not remove file if warning is set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
+      DUMMY_SYNX_TEST_PROJECT.file_utils.rm_rf('/the_path')
+
+      expect(FileUtils).to_not have_received(:rm_rf)
+    end
+
+    it "should not move file if warning is set" do
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
+      DUMMY_SYNX_TEST_PROJECT.file_utils.mv('/the_path', '/the_other_path')
+
+      expect(FileUtils).to_not have_received(:mv)
     end
   end
 end

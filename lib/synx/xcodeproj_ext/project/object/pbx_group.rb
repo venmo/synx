@@ -8,6 +8,7 @@ module Xcodeproj
           if excluded_from_sync?
             Synx::Tabber.puts "#{basename}/ (excluded)".yellow
           else
+            track_sync_issues
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
 
@@ -35,6 +36,8 @@ module Xcodeproj
         end
 
         def sort_by_name
+          before_sorting = children.to_a
+
           children.sort! do |x, y|
             if x.isa == 'PBXGroup' && !(y.isa == 'PBXGroup')
               -1
@@ -46,6 +49,19 @@ module Xcodeproj
               0
             end
           end
+
+          if before_sorting != children.to_a
+            issue = "Group #{pretty_hierarchy_path} is not sorted alphabetically."
+            project.sync_issues_repository.add_issue(issue, real_path, :not_sorted)
+          end
+        end
+
+        def pretty_hierarchy_path
+          if hierarchy_path.to_s.empty?
+            '/'
+          else
+            hierarchy_path.to_s
+          end
         end
 
         def move_entries_not_in_xcodeproj
@@ -55,7 +71,7 @@ module Xcodeproj
             Synx::Tabber.puts "#{basename}/".green
             Synx::Tabber.increase
             real_path.children.each do |entry_pathname|
-              unless project.has_object_for_pathname?(entry_pathname)
+              unless project.scanned_files.include?(entry_pathname.to_s) or project.has_object_for_pathname?(entry_pathname)
                 handle_unused_entry(entry_pathname)
               end
             end
@@ -97,12 +113,14 @@ module Xcodeproj
           is_file_to_prune = prune_file_extensions.include?(file_pathname.extname.downcase)
 
           if is_file_to_prune && project.prune
+            issue = "Unused file not referenced by Xcode project: #{file_pathname.basename}."
+            project.sync_issues_repository.add_issue(issue, file_pathname.basename, :unused)
             Synx::Tabber.puts "#{file_pathname.basename} (removed source/image file that is not referenced by the Xcode project)".red
             return
           elsif !project.prune || !is_file_to_prune
             destination = project.pathname_to_work_pathname(file_pathname.parent.realpath)
             destination.mkpath
-            FileUtils.mv(file_pathname.realpath, destination)
+            file_utils.mv(file_pathname.realpath, destination)
             if is_file_to_prune
               Synx::Tabber.puts "#{file_pathname.basename} (source/image file that is not referenced by the Xcode project)".yellow
             else

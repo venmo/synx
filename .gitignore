@@ -44,3 +44,4 @@ DerivedData
 
 # Spec
 spec/test_dummy/
+spec/test_dry_run_dummy/

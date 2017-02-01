@@ -45,6 +45,7 @@ Synx supports the following options:
   --no-sort-by-name             disable sorting groups by name
   --quiet, -q                   silence all output
   --exclusion, -e EXCLUSION     ignore an Xcode group while syncing
+  --warn-type, -w warning|error show warnings or errors only without modifying the project structure
 ```
 
 For example, OCMock could have been organized using this command:
@@ -52,6 +53,16 @@ For example, OCMock could have been organized using this command:
     $ synx -p -e "/OCMock/Core Mocks" -e /OCMockTests Source/OCMock.xcodeproj/
 
 if they had wanted not to sync the `/OCMock/Core Mocks` and `/OCMockTests` groups, and also remove (`-p`) any image/source files found by synx that weren't referenced by any groups in Xcode.
+
+### Integration with Xcode
+
+Synx can be integrated with Xcode to check for synchronization issues after every build. In order to do that open your project settings, go to **Build Phases** tab, click **+** sign and select **New Run Script Phase**. Paste the following content into Run script window:
+
+    synx -w warning ${PROJECT_FILE_PATH}
+
+You can also make Synx fail the build in case it finds any issues with a following script:
+
+    synx -w error ${PROJECT_FILE_PATH}
 
 ## Contributing
 

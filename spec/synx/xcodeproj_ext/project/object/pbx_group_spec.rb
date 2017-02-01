@@ -27,4 +27,18 @@ describe Xcodeproj::Project::Object::PBXGroup do
       expect(top_group.groups_containing_forward_slash).to eq([child_1, child_1_2, child_2_2])
     end
   end
+
+  describe "pretty_hierarchy_path" do
+    it "should return / in case hierarchy path is empty (top level)" do
+      main_group = DUMMY_SYNX_TEST_PROJECT.main_group
+
+      expect(main_group.pretty_hierarchy_path).to eq('/')
+    end
+
+    it "should return hierarchy path if it is not empty" do
+      dummy_group = DUMMY_SYNX_TEST_PROJECT.main_group.children.select { |g| g.basename == 'dummy' }.first
+
+      expect(dummy_group.pretty_hierarchy_path).to eq('/dummy')
+    end
+  end
 end

@@ -12,6 +12,7 @@ Clamp do
   option "--no-sort-by-name", :flag, "disable sorting groups by name"
   option ["--quiet", "-q"], :flag, "silence all output"
   option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
+  option ["--warn-type", "-w"], "warning|error", "show warnings or errors only without modifying the project structure", :attribute_name => :warn_type
   option ["--version", "-v"], :flag, "shows synx version" do
     puts "Synx #{Synx::VERSION}"
     exit(0)
@@ -22,7 +23,8 @@ Clamp do
       puts "You cannot run Synx as root.".red
     else
       project = Synx::Project.open(xcodeproj_path)
-      project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :no_sort_by_name => no_sort_by_name?, :group_exclusions => exclusion_list)
+      project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :no_sort_by_name => no_sort_by_name?, :group_exclusions => exclusion_list, :warn => warn_type)
+      exit(project.exit_code)
     end
   end
 

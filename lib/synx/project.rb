@@ -1,4 +1,3 @@
-require 'fileutils'
 require 'xcodeproj'
 
 module Synx
@@ -10,7 +9,7 @@ module Synx
     DEFAULT_EXCLUSIONS = %W(/Libraries /Frameworks /Products /Pods)
     private_constant :DEFAULT_EXCLUSIONS
 
-    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name
+    attr_accessor :delayed_groups_set_path, :group_exclusions, :prune, :sort_by_name, :warn_type, :file_utils
 
     def sync(options={})
       set_options(options)
@@ -24,7 +23,8 @@ module Synx
       main_group.sort_by_name if self.sort_by_name
       transplant_work_project
       Synx::Tabber.decrease
-      save
+      print_dry_run_issues
+      save unless warn_type
     end
 
     def presync_check
@@ -50,16 +50,27 @@ module Synx
 
       self.group_exclusions |= options[:group_exclusions] if options[:group_exclusions]
       self.sort_by_name = !options[:no_sort_by_name]
+      self.warn_type = validated_warn_type(options)
 
       Synx::Tabber.options = options
+      sync_issues_repository.output = options[:output] unless options[:output].nil?
     end
     private :set_options
+
+    def validated_warn_type(options)
+      if options[:warn].to_s == 'warning' or options[:warn].to_s == 'error'
+        options[:warn]
+      elsif options[:warn]
+        Synx::Tabber.puts "Unknown warn-type: #{options[:warn]}".red
+        abort
+      end
+    end
 
     def transplant_work_project
       # Move the synced entries over
       Dir.glob(work_root_pathname + "*").each do |path|
-        FileUtils.rm_rf(work_pathname_to_pathname(Pathname(path)))
-        FileUtils.mv(path, root_pathname.to_s)
+        file_utils.rm_rf(work_pathname_to_pathname(Pathname(path)))
+        file_utils.mv(path, root_pathname.to_s)
       end
     end
     private :transplant_work_project
@@ -74,7 +85,7 @@ module Synx
       else
         @work_root_pathname = Pathname(File.join(SYNXRONIZE_DIR, root_pathname.basename.to_s))
         # Clean up any previous synx and start fresh
-        FileUtils.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
+        file_utils.rm_rf(@work_root_pathname.to_s) if @work_root_pathname.exist?
         @work_root_pathname.mkpath
         @work_root_pathname
       end
@@ -121,6 +132,29 @@ module Synx
         end
       end
     end
+
+    def file_utils
+      @file_utils ||= (warn_type.nil? ? FileUtils : Synx::BlankFileUtils)
+    end
+
+    def sync_issues_repository
+      @sync_issues ||= Synx::IssueRegistry.new
+    end
+
+    def print_dry_run_issues
+      sync_issues_repository.print(warn_type.to_s) if warn_type
+    end
+
+    def scanned_files
+      @scanned_files ||= []
+    end
+
+    def exit_code
+      if warn_type.to_s == 'error' and sync_issues_repository.issues_count > 0
+        -1
+      else
+        0
+      end
+    end
   end
 end
-
