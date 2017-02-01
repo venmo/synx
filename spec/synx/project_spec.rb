@@ -171,39 +171,37 @@ describe Synx::Project do
     describe "with warn option enabled" do
 
       before(:all) do
-        FileUtils.rm_rf(DUMMY_SYNX_TEST_PATH)
-        FileUtils.cp_r(DUMMY_SYNX_PATH, DUMMY_SYNX_TEST_PATH)
-        DUMMY_SYNX_TEST_PROJECT.sync(:warn => 'warning', :output => StringIO.new, :prune => true)
+        DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync(:warn => 'warning', :output => StringIO.new, :prune => true)
       end
 
       it "should not modify the .pbxproj file" do
-        expect(FileUtils.identical?(DUMMY_SYNX_PBXPROJ_PATH, DUMMY_SYNX_TEST_PBXPROJ_PATH)).to be(true)
+        expect(FileUtils.identical?(DUMMY_SYNX_PBXPROJ_PATH, DUMMY_SYNX_DRY_RUN_TEST_PBXPROJ_PATH)).to be(true)
       end
 
       it "should not modify files structure" do
-        verify_file_structure(Pathname(DUMMY_SYNX_TEST_PROJECT_PATH).parent, original_file_structure)
+        verify_file_structure(Pathname(DUMMY_SYNX_DRY_RUN_TEST_PROJECT_PATH).parent, original_file_structure)
       end
 
       it "should register group synchronize issues" do
-        group_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'FolderWithGroupNotLinked'
+        group_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'FolderWithGroupNotLinked'
 
         expect(group_issues).to match_array(['Group FolderWithGroupNotLinked is not synchronized with file system (current path: dummy, desired path: dummy/FolderWithGroupNotLinked).'])
       end
 
       it "should register file synchronize issues" do
-        file_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'Wowwww.m'
+        file_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'Wowwww.m'
 
         expect(file_issues).to match_array(['File reference Wowwww.m is not synchronized with file system (current path: dummy/AlreadySynced/FolderNotInXcodeProj/Wowwww.m, desired path: dummy/SuchGroup/VeryChildGroup/Wowwww.m).'])
       end
 
       it "should register unused files issues" do
-        unused_file_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'image-not-in-xcodeproj.png'
+        unused_file_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'image-not-in-xcodeproj.png'
 
         expect(unused_file_issues).to match_array(['Unused file not referenced by Xcode project: image-not-in-xcodeproj.png.'])
       end
 
       it "should register sorting issues" do
-        group_sort_issues = DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.issues_for_basename 'AlreadySynced'
+        group_sort_issues = DUMMY_SYNX_DRY_RUN_TEST_PROJECT.sync_issues_repository.issues_for_basename 'AlreadySynced'
 
         expect(group_sort_issues).to match_array(['Group /dummy/AlreadySynced is not sorted alphabetically.'])
       end
