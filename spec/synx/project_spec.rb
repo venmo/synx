@@ -293,14 +293,21 @@ describe Synx::Project do
 
     it "should return 0 if no issues were found" do
       DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(0)
-      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => :warning)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'warning')
 
       expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(0)
     end
 
-    it "should return -1 if warn is set and issues were found" do
+    it "should return 0 if warn is set to warning" do
       DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(1)
-      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => :warning)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'warning')
+
+      expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(0)
+    end
+
+    it "should return -1 if warn is set to error and issues were found" do
+      DUMMY_SYNX_TEST_PROJECT.sync_issues_repository.stub(:issues_count).and_return(1)
+      DUMMY_SYNX_TEST_PROJECT.sync(:output => StringIO.new, :warn => 'error')
 
       expect(DUMMY_SYNX_TEST_PROJECT.exit_code).to eq(-1)
     end

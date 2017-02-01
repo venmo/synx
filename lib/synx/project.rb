@@ -143,11 +143,11 @@ module Synx
     end
 
     def print_dry_run_issues
-      sync_issues_repository.print warn_type if warn_type
+      sync_issues_repository.print(warn_type.to_s) if warn_type
     end
 
     def exit_code
-      if warn_type and sync_issues_repository.issues_count > 0
+      if warn_type.to_s == 'error' and sync_issues_repository.issues_count > 0
         -1
       else
         0
