@@ -10,6 +10,7 @@ Clamp do
   option "--no-color", :flag, "removes all color from the output"
   option "--no-default-exclusions", :flag, "doesn't use the default exclusions of /Libraries, /Frameworks, and /Products"
   option "--no-sort-by-name", :flag, "disable sorting groups by name"
+  option "--sort-by-type", :flag, "sort group items first by type, then by name (ignores --no-sort-by-name)"
   option ["--quiet", "-q"], :flag, "silence all output"
   option ["--exclusion", "-e"], "EXCLUSION", "ignore an Xcode group while syncing", :multivalued => true
   option ["--version", "-v"], :flag, "shows synx version" do
@@ -22,7 +23,15 @@ Clamp do
       puts "You cannot run Synx as root.".red
     else
       project = Synx::Project.open(xcodeproj_path)
-      project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :no_sort_by_name => no_sort_by_name?, :group_exclusions => exclusion_list)
+      project.sync(
+        :prune => prune?,
+        :quiet => quiet?,
+        :no_color => no_color?,
+        :no_default_exclusions => no_default_exclusions?,
+        :no_sort_by_name => no_sort_by_name?,
+        :sort_by_type => sort_by_type?,
+        :group_exclusions => exclusion_list
+      )
     end
   end
 

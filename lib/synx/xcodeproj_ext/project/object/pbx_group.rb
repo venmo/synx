@@ -24,7 +24,12 @@ module Xcodeproj
               group.sync(self)
             end
             sync_path
-            sort_by_name if project.sort_by_name
+
+            if project.sort_by_type
+              sort_by_type
+            elsif project.sort_by_name
+              sort_by_name
+            end
 
             Synx::Tabber.decrease
           end
@@ -42,6 +47,34 @@ module Xcodeproj
               1
             elsif x.display_name && y.display_name
               x.display_name <=> y.display_name
+            else
+              0
+            end
+          end
+        end
+
+        def sort_by_type
+          children.sort! do |x, y|
+            if x.isa == 'PBXFileReference' && y.isa == 'PBXFileReference'
+              if x.last_known_file_type == y.last_known_file_type
+                x.display_name <=> y.display_name
+              else
+                x.last_known_file_type <=> y.last_known_file_type
+              end
+            elsif x.isa == 'PBXGroup' && y.isa == 'PBXGroup'
+              x.display_name <=> y.display_name
+            elsif x.isa == 'PBXVariantGroup' && y.isa == 'PBXVariantGroup'
+              x.display_name <=> y.display_name
+            elsif x.isa == 'PBXGroup'
+              -1
+            elsif x.isa == 'PBXVariantGroup'
+              if y.isa == 'PBXGroup'
+                1
+              else
+                -1
+              end
+            elsif y.isa == 'PBXGroup' || y.isa == 'PBXVariantGroup'
+              1
             else
               0
             end
